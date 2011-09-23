@@ -1,0 +1,11 @@
+bin
+obj
+*.user
+*.suo
+*.vsp
+*.csproj.VisualState.xml
+TestResult.xml
+*.swp
+UpgradeLog.XML
+_ReSharper.*/
+_UpgradeReport_Files/
