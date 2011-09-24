@@ -5,16 +5,11 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Reflection;
-using System.Runtime.Remoting;
 
 namespace JustAProgrammer.ADPR
 {
     public sealed class AppDomainPoshRunner : MarshalByRefObject
     {
-        public AppDomainPoshRunner ()
-        {
-            Console.WriteLine("Made it here.");
-        }
 
         public static string[] RunScriptInAppDomain(string fileName, string appDomainName = "Unamed")
         {
@@ -24,16 +19,11 @@ namespace JustAProgrammer.ADPR
                                 {
                                     ApplicationName = appDomainName,
                                     // TODO: Perhaps we should setup an even handler to reload the AppDomain similar to ASP.NET in IIS.
-                                    ShadowCopyFiles = "true"
+                                    ShadowCopyFiles = "true",
                                 };
             var appDomain = AppDomain.CreateDomain(string.Format("AppDomainPoshRunner-{0}", appDomainName), null, setupInfo);
             try {
                 var runner = appDomain.CreateInstanceFromAndUnwrap(assembly.Location, typeof(AppDomainPoshRunner).FullName);
-                if (RemotingServices.IsTransparentProxy(runner))
-                    Console.WriteLine("The unwrapped object is a proxy.");
-                else
-                    Console.WriteLine("The unwrapped object is not a proxy!");  
-                Console.WriteLine("The unwrapped project is a {0}", runner.GetType().FullName);
                 return ((AppDomainPoshRunner)runner).RunScript(fileName);
             }
             finally
