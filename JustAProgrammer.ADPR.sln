@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustAProgrammer.ADPR", "Jus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustAProgrammer.ADPR.Console", "JustAProgrammer.ADPR.Console\JustAProgrammer.ADPR.Console.csproj", "{90A26E8F-D808-474A-9570-DDC0145708D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustAProgrammer.ADPR.Helper", "JustAProgrammer.ADPR.Helper\JustAProgrammer.ADPR.Helper.csproj", "{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{90A26E8F-D808-474A-9570-DDC0145708D7}.Release|Mixed Platforms.Build.0 = Release|x86
 		{90A26E8F-D808-474A-9570-DDC0145708D7}.Release|x86.ActiveCfg = Release|x86
 		{90A26E8F-D808-474A-9570-DDC0145708D7}.Release|x86.Build.0 = Release|x86
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{70BBC6DB-C850-41D7-8538-AEEA8461CE2D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
