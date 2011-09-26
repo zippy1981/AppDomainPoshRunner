@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var results =  AppDomainPoshRunner.RunScriptInAppDomain("AppDomainPoshRunner.SecondAppDomain.ps1");
+            var results =  AppDomainPoshRunner.RunScriptInNewAppDomain("AppDomainPoshRunner.SecondAppDomain.ps1");
             foreach (var result in results)
             {
                 System.Console.WriteLine(result);

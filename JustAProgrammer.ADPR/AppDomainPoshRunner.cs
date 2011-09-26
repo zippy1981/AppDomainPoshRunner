@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
+using System.Management.Automation.Host;
 using System.Management.Automation.Runspaces;
 using System.Reflection;
 
@@ -10,8 +11,13 @@ namespace JustAProgrammer.ADPR
 {
     public sealed class AppDomainPoshRunner : MarshalByRefObject
     {
-
-        public static string[] RunScriptInAppDomain(string fileName, string appDomainName = "Unamed")
+        /// <summary>
+        /// Created a new <see cref="AppDomain"/> and runs the given powershell script.
+        /// </summary>
+        /// <param name="fileName">The name of the powershell script to run.</param>
+        /// <param name="appDomainName">The name of the AppDomain.</param>
+        /// <returns>The output of the script as an array of strings.</returns>
+        public static string[] RunScriptInNewAppDomain(string fileName, string appDomainName = "AppDomainPoshRunner")
         {
             var assembly = Assembly.GetExecutingAssembly();
             
@@ -31,14 +37,34 @@ namespace JustAProgrammer.ADPR
                 AppDomain.Unload(appDomain);
             }
         }
+        
+        /// <summary>
+        /// Run a PowerShell script in the <see cref="PSHost"/>
+        /// </summary>
+        /// <param name="fileName">The path to the script to run.</param>
+        /// <param name="host">The <see cref="PSHost"/> to pass along to it.</param>
+        /// <returns>Script output as an array of strings.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="host"/> is null.</exception>
+        public static string[] RunScriptInPSHost(string fileName, PSHost host)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException("host", "You must pass a PSHost.");
+            }
+            var runner = new AppDomainPoshRunner();
+            return runner.RunScript(fileName, host);
+        }
+
+
 
         /// <summary>
-        /// Creates a PowerShell runspace to run the script under.
+        /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
         /// </summary>
         /// <param name="fileName">The name of the text file to run as a powershell script.</param>
+        /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
         /// <exception cref="FileNotFoundException">Thrown if the <paramref name="fileName"/> does not exist.</exception>
-        /// <returns></returns>
-        private string[] RunScript(string fileName)
+        /// <returns><see cref="PSHost"/></returns>
+        private string[] RunScript(string fileName, PSHost host = null)
         {
             if (!File.Exists(fileName))
             {
@@ -47,7 +73,7 @@ namespace JustAProgrammer.ADPR
 
             var scriptText = File.ReadAllText(fileName);
             Collection<PSObject> results;
-            using (var runspace = RunspaceFactory.CreateRunspace())
+            using (var runspace = (host == null) ? RunspaceFactory.CreateRunspace() : RunspaceFactory.CreateRunspace(host))
             {
                 runspace.Open();
                 using (var pipeline = runspace.CreatePipeline())
