@@ -44,5 +44,7 @@ Make-Dll;
 $hw = New-Object HelloWorld
 $Host
 
-Write-Host $hw.SayHello($person);
+#Write-Host $hw.SayHello($person);
 
+Add-Type -AssemblyName 'System.Configuration'
+[System.Configuration.ConfigurationManager]::AppSettings| %{ "$($_): $([System.Configuration.ConfigurationManager]::AppSettings[$_])" }

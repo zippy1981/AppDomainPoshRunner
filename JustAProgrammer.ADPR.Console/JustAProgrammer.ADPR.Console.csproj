@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,6 +63,9 @@
   <ItemGroup>
     <None Include="..\JustAProgrammer.ADPR\AppDomainPoshRunner.SecondAppDomain.ps1">
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="AppDomainPoshRunner.SecondAppDomain.ps1.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

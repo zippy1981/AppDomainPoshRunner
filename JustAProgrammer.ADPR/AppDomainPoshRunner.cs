@@ -15,15 +15,17 @@ namespace JustAProgrammer.ADPR
         /// Created a new <see cref="AppDomain"/> and runs the given powershell script.
         /// </summary>
         /// <param name="fileName">The name of the powershell script to run.</param>
+        /// /// <param name="configFileName">The name of the configuration file. If you set it to null it will defaul to <code><paramref name="fileName"/>.config</code>.</param>
         /// <param name="appDomainName">The name of the AppDomain.</param>
         /// <returns>The output of the script as an array of strings.</returns>
-        public static string[] RunScriptInNewAppDomain(string fileName, string appDomainName = "AppDomainPoshRunner")
+        public static string[] RunScriptInNewAppDomain(string fileName, string configFileName = null, string appDomainName = "AppDomainPoshRunner")
         {
             var assembly = Assembly.GetExecutingAssembly();
             
             var setupInfo = new AppDomainSetup
                                 {
                                     ApplicationName = appDomainName,
+                                    ConfigurationFile = configFileName ?? string.Format("{0}.config", fileName),
                                     // TODO: Perhaps we should setup an even handler to reload the AppDomain similar to ASP.NET in IIS.
                                     ShadowCopyFiles = "true",
                                 };
@@ -68,7 +70,7 @@ namespace JustAProgrammer.ADPR
         {
             if (!File.Exists(fileName))
             {
-                throw new FileNotFoundException("Powershell script not found", fileName);
+                throw new FileNotFoundException("PowerShell script not found", fileName);
             }
 
             var scriptText = File.ReadAllText(fileName);
@@ -84,7 +86,6 @@ namespace JustAProgrammer.ADPR
                     runspace.Close();
                 }
             }
-
 
             return (from result in results select result.ToString()).ToArray();
         }
