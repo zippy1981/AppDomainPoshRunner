@@ -62,6 +62,45 @@ namespace JustAProgrammer.ADPR
         /// <summary>
         /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
         /// </summary>
+        /// <param name="command">The name of the text file to run as a powershell script.</param>
+        /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
+        /// <exception cref="FileNotFoundException">Thrown if the <paramref name="command"/> does not exist.</exception>
+        /// <returns><see cref="PSHost"/></returns>
+        private string[] RunCommand(string command, PSHost host = null)
+        {
+            Collection<PSObject> results;
+            using (var runspace = (host == null) ? RunspaceFactory.CreateRunspace() : RunspaceFactory.CreateRunspace(host))
+            {
+                runspace.Open();
+                results = RunCommand(runspace, command, true);
+                runspace.Close();
+            }
+
+            return (from result in results select result.ToString()).ToArray();
+        }
+
+        /// <summary>
+        /// Runs a PowerShell command under a given <see cref="Runspace"/>.
+        /// </summary>
+        /// <param name="runspace">The Runspace to run the command under.</param>
+        /// <param name="command"></param>
+        /// <param name="outString"></param>
+        /// <returns></returns>
+        private static Collection<PSObject> RunCommand(Runspace runspace, string command, bool outString = false)
+        {
+            Collection<PSObject> results;
+            using (var pipeline = runspace.CreatePipeline())
+            {
+                pipeline.Commands.Add(command);
+                if (outString) { pipeline.Commands.Add("Out-String"); }
+                results = pipeline.Invoke();
+            }
+            return results;
+        }
+
+        /// <summary>
+        /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
+        /// </summary>
         /// <param name="fileName">The name of the text file to run as a powershell script.</param>
         /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
         /// <exception cref="FileNotFoundException">Thrown if the <paramref name="fileName"/> does not exist.</exception>
