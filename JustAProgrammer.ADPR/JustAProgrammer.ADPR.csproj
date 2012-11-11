@@ -83,6 +83,7 @@
     <None Include="AppDomainPoshRunner.SecondAppDomain.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="AppDomainPoshRunner.SecondAppDomain.ps1.config" />
     <None Include="AppDomainPoshRunner.Tester.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
