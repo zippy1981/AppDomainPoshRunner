@@ -78,16 +78,30 @@ namespace JustAProgrammer.ADPR
             using (var runspace = (host == null) ? RunspaceFactory.CreateRunspace() : RunspaceFactory.CreateRunspace(host))
             {
                 runspace.Open();
-                using (var pipeline = runspace.CreatePipeline())
-                {
-                    pipeline.Commands.AddScript(scriptText);
-                    pipeline.Commands.Add("Out-String");
-                    results = pipeline.Invoke();
-                    runspace.Close();
-                }
+                results = RunScript(runspace, scriptText, true);
+                runspace.Close();
             }
 
             return (from result in results select result.ToString()).ToArray();
+        }
+
+        /// <summary>
+        /// Runs a PowerShell script under a given <see cref="Runspace"/>.
+        /// </summary>
+        /// <param name="runspace">The Runspace to run the script under.</param>
+        /// <param name="scriptText"></param>
+        /// <param name="outString"></param>
+        /// <returns></returns>
+        private static Collection<PSObject> RunScript(Runspace runspace, string scriptText, bool outString = false)
+        {
+            Collection<PSObject> results;
+            using (var pipeline = runspace.CreatePipeline())
+            {
+                pipeline.Commands.AddScript(scriptText);
+                if (outString) { pipeline.Commands.Add("Out-String"); }
+                results = pipeline.Invoke();
+            }
+            return results;
         }
     }
 }
