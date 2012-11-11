@@ -15,7 +15,7 @@ namespace JustAProgrammer.ADPR
         /// Created a new <see cref="AppDomain"/> and runs the given powershell script.
         /// </summary>
         /// <param name="fileName">The name of the powershell script to run.</param>
-        /// /// <param name="configFileName">The name of the configuration file. If you set it to null it will defaul to <code><paramref name="fileName"/>.config</code>.</param>
+        /// /// <param name="configFileName">The name of the configuration file. If you set it to null it will default to <code><paramref name="fileName"/>.config</code>.</param>
         /// <param name="appDomainName">The name of the AppDomain.</param>
         /// <returns>The output of the script as an array of strings.</returns>
         public static string[] RunScriptInNewAppDomain(string fileName, string configFileName = null, string appDomainName = "AppDomainPoshRunner")
@@ -62,11 +62,11 @@ namespace JustAProgrammer.ADPR
         /// <summary>
         /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
         /// </summary>
-        /// <param name="command">The name of the text file to run as a powershell script.</param>
+        /// <param name="command">The PowerShell command to run.</param>
         /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
         /// <exception cref="FileNotFoundException">Thrown if the <paramref name="command"/> does not exist.</exception>
         /// <returns><see cref="PSHost"/></returns>
-        private string[] RunCommand(string command, PSHost host = null)
+        public string[] RunCommand(string command, PSHost host = null)
         {
             Collection<PSObject> results;
             using (var runspace = (host == null) ? RunspaceFactory.CreateRunspace() : RunspaceFactory.CreateRunspace(host))
@@ -83,10 +83,10 @@ namespace JustAProgrammer.ADPR
         /// Runs a PowerShell command under a given <see cref="Runspace"/>.
         /// </summary>
         /// <param name="runspace">The Runspace to run the command under.</param>
-        /// <param name="command"></param>
-        /// <param name="outString"></param>
+        /// <param name="command">The PowerShell command to run.</param>
+        /// <param name="outString">Set to true to add an Out-String to the end of the pipeline.</param>
         /// <returns></returns>
-        private static Collection<PSObject> RunCommand(Runspace runspace, string command, bool outString = false)
+        public static Collection<PSObject> RunCommand(Runspace runspace, string command, bool outString = false)
         {
             Collection<PSObject> results;
             using (var pipeline = runspace.CreatePipeline())
@@ -128,8 +128,8 @@ namespace JustAProgrammer.ADPR
         /// Runs a PowerShell script under a given <see cref="Runspace"/>.
         /// </summary>
         /// <param name="runspace">The Runspace to run the script under.</param>
-        /// <param name="scriptText"></param>
-        /// <param name="outString"></param>
+        /// <param name="scriptText">The name of the text file to run as a powershell script.</param>
+        /// <param name="outString">Set to true to add an Out-String to the end of the pipeline.</param>
         /// <returns></returns>
         private static Collection<PSObject> RunScript(Runspace runspace, string scriptText, bool outString = false)
         {
