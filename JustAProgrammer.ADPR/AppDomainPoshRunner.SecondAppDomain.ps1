@@ -43,7 +43,7 @@ $person = New-Object Person -Property @{
 Make-Dll;
 
 $hw = New-Object HelloWorld
-$Host
+$Host | fl
 
 
 $VerbosePreference = 'Continue';
@@ -51,8 +51,10 @@ $DebugPreference = 'Continue';
 Write-Verbose 'Verbose Message';
 Write-Debug 'Debug Message';
 Write-Host 'Host Message';
+Write-Host -ForegroundColor green "Green Text"
 Write-Warning 'Warning Message';
-Write-Error 'Error Messaage'
+# Write-Error will write the whole script
+# Write-Error 'Error Message'
 
 Write-Host "Config File: $([AppDomain]::CurrentDomain.SetupInformation.ConfigurationFile)";
 Add-Type -AssemblyName 'System.Configuration'

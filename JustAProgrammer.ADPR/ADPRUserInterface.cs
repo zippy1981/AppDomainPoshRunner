@@ -7,12 +7,10 @@ using System.Management.Automation.Host;
 namespace JustAProgrammer.ADPR
 {
     /// <summary>
-    /// A sample implementation of the PSHostUserInterface abstract class for 
-    /// console applications. Not all members are implemented. Those that are 
-    /// not implemented throw a NotImplementedException exception. Members that 
-    /// are implemented include those that map easily to Console APIs. 
+    /// An implementation of the <seealso cref="PSHostUserInterface"/> abstract class for 
+    /// console applications.
     /// </summary>
-    /// <remarks>Taken from the msdn page <seealso cref="http://msdn.microsoft.com/en-us/library/windows/desktop/ee706570(v=vs.85).aspx">Writing a Windows PowerShell Host Application</seealso></remarks>
+    /// <remarks>Based on the msdn page <seealso cref="http://msdn.microsoft.com/en-us/library/windows/desktop/ee706570(v=vs.85).aspx">Writing a Windows PowerShell Host Application</seealso></remarks>
     internal class ADPRUserInterface : PSHostUserInterface
     {
         /// <summary>
@@ -193,7 +191,7 @@ namespace JustAProgrammer.ADPR
         /// </summary>
         public override void WriteLine()
         {
-            System.Console.WriteLine();
+            Console.WriteLine();
         }
 
         /// <summary>

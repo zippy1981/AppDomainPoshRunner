@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
-using System.Management.Automation.Host;
 using System.Management.Automation.Runspaces;
 using System.Reflection;
 
@@ -32,92 +31,50 @@ namespace JustAProgrammer.ADPR
             var appDomain = AppDomain.CreateDomain(string.Format("AppDomainPoshRunner-{0}", appDomainName), null, setupInfo);
             try {
                 var runner = appDomain.CreateInstanceFromAndUnwrap(assembly.Location, typeof(AppDomainPoshRunner).FullName);
-                return ((AppDomainPoshRunner)runner).RunScript(fileName);
+                return ((AppDomainPoshRunner)runner).RunScript(new Uri(Path.GetFullPath(fileName)));
             }
             finally
             {
                 AppDomain.Unload(appDomain);
             }
         }
-        
+
         /// <summary>
-        /// Run a PowerShell script in the <see cref="PSHost"/>
+        /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
         /// </summary>
-        /// <param name="fileName">The path to the script to run.</param>
-        /// <param name="host">The <see cref="PSHost"/> to pass along to it.</param>
-        /// <returns>Script output as an array of strings.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="host"/> is null.</exception>
-        public static string[] RunScriptInPSHost(string fileName, PSHost host)
+        /// <param name="file">The name of the text file to run as a powershell script.</param>
+        /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
+        /// <exception cref="FileNotFoundException">Thrown if the <paramref name="file"/> does not exist.</exception>
+        /// <returns></returns>
+        public string[] RunScript(Uri file, ADPRHost host = null)
         {
+            if (!File.Exists(file.LocalPath))
+            {
+                throw new FileNotFoundException("PowerShell script not found", file.AbsolutePath);
+            }
+
+            var script = File.ReadAllText(file.LocalPath);
+            return RunScript(script, host);
+        }
+
+        /// <summary>
+        /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
+        /// </summary>
+        /// <param name="script">The script to run.</param>
+        /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
+        /// <returns></returns>
+        public string[] RunScript(string script, ADPRHost host = null)
+        {
+            Collection<PSObject> results;
             if (host == null)
             {
-                throw new ArgumentNullException("host", "You must pass a PSHost.");
+                var state = new ADPRState();
+                host = new ADPRHost(state);
             }
-            var runner = new AppDomainPoshRunner();
-            return runner.RunScript(fileName, host);
-        }
-
-
-
-        /// <summary>
-        /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
-        /// </summary>
-        /// <param name="command">The PowerShell command to run.</param>
-        /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
-        /// <exception cref="FileNotFoundException">Thrown if the <paramref name="command"/> does not exist.</exception>
-        /// <returns><see cref="PSHost"/></returns>
-        public string[] RunCommand(string command, PSHost host = null)
-        {
-            Collection<PSObject> results;
-            using (var runspace = (host == null) ? RunspaceFactory.CreateRunspace() : RunspaceFactory.CreateRunspace(host))
+            using (var runspace = (RunspaceFactory.CreateRunspace(host)))
             {
                 runspace.Open();
-                results = RunCommand(runspace, command, true);
-                runspace.Close();
-            }
-
-            return (from result in results select result.ToString()).ToArray();
-        }
-
-        /// <summary>
-        /// Runs a PowerShell command under a given <see cref="Runspace"/>.
-        /// </summary>
-        /// <param name="runspace">The Runspace to run the command under.</param>
-        /// <param name="command">The PowerShell command to run.</param>
-        /// <param name="outString">Set to true to add an Out-String to the end of the pipeline.</param>
-        /// <returns></returns>
-        public static Collection<PSObject> RunCommand(Runspace runspace, string command, bool outString = false)
-        {
-            Collection<PSObject> results;
-            using (var pipeline = runspace.CreatePipeline())
-            {
-                pipeline.Commands.Add(command);
-                if (outString) { pipeline.Commands.Add("Out-String"); }
-                results = pipeline.Invoke();
-            }
-            return results;
-        }
-
-        /// <summary>
-        /// Creates a PowerShell <see cref="Runspace"/> to run a script under.
-        /// </summary>
-        /// <param name="fileName">The name of the text file to run as a powershell script.</param>
-        /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
-        /// <exception cref="FileNotFoundException">Thrown if the <paramref name="fileName"/> does not exist.</exception>
-        /// <returns><see cref="PSHost"/></returns>
-        private string[] RunScript(string fileName, PSHost host = null)
-        {
-            if (!File.Exists(fileName))
-            {
-                throw new FileNotFoundException("PowerShell script not found", fileName);
-            }
-
-            var scriptText = File.ReadAllText(fileName);
-            Collection<PSObject> results;
-            using (var runspace = (host == null) ? RunspaceFactory.CreateRunspace() : RunspaceFactory.CreateRunspace(host))
-            {
-                runspace.Open();
-                results = RunScript(runspace, scriptText, true);
+                results = RunScript(runspace, script, true);
                 runspace.Close();
             }
 
@@ -137,7 +94,12 @@ namespace JustAProgrammer.ADPR
             using (var pipeline = runspace.CreatePipeline())
             {
                 pipeline.Commands.AddScript(scriptText);
-                if (outString) { pipeline.Commands.Add("Out-String"); }
+                if (outString)
+                {
+                    pipeline.Commands[0].MergeMyResults(PipelineResultTypes.Error, PipelineResultTypes.Output);;
+                    //pipeline.Commands.Add("Out-String");
+                    pipeline.Commands.Add("Out-Default");
+                }
                 results = pipeline.Invoke();
             }
             return results;

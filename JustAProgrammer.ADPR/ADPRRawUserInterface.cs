@@ -4,12 +4,12 @@ using System.Management.Automation.Host;
 namespace JustAProgrammer.ADPR
 {
     /// <summary>
-    /// A sample implementation of the PSHostRawUserInterface for console
+    /// A sample implementation of the <seealso cref="PSHostRawUserInterface"/> for console
     /// applications. Members of this class that easily map to the .NET 
     /// console class are implemented. More complex methods are not 
     /// implemented and throw a NotImplementedException exception.
     /// </summary>
-    /// <remarks>Taken from the msdn page <seealso cref="http://msdn.microsoft.com/en-us/library/windows/desktop/ee706570(v=vs.85).aspx">Writing a Windows PowerShell Host Application</seealso></remarks>
+    /// <remarks>Based on the msdn page <seealso cref="http://msdn.microsoft.com/en-us/library/windows/desktop/ee706570(v=vs.85).aspx">Writing a Windows PowerShell Host Application</seealso></remarks>
     internal class ADPRRawUserInterface : PSHostRawUserInterface
     {
         /// <summary>
