@@ -66,7 +66,9 @@
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="AppDomainPoshRunner.SecondAppDomain.ps1.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

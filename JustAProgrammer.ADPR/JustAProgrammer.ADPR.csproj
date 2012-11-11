@@ -52,7 +52,9 @@
     <Compile Include="..\GlobalAssembly.cs">
       <Link>Properties\GlobalAssembly.cs</Link>
     </Compile>
+    <Compile Include="ADPRRawUserInterface.cs" />
     <Compile Include="AppDomainPoshRunner.cs" />
+    <Compile Include="ADPRUserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
