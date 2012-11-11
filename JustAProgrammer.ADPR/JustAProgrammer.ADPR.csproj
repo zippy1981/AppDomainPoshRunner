@@ -62,7 +62,6 @@
     <None Include="AppDomainPoshRunner.Tester.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="JustAProgramer.ADPR.pfx" />
     <None Include="JustAProgrammer.ADPR.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
