@@ -12,10 +12,10 @@ namespace JustAProgrammer.ADPR
     public sealed class AppDomainPoshRunner : MarshalByRefObject
     {
         /// <summary>
-        /// Created a new <see cref="AppDomain"/> and runs the given powershell script.
+        /// Created a new <see cref="AppDomain"/> and runs the given PowerShell script.
         /// </summary>
-        /// <param name="fileName">The name of the powershell script to run.</param>
-        /// /// <param name="configFileName">The name of the configuration file. If you set it to null it will default to <code><paramref name="fileName"/>.config</code>.</param>
+        /// <param name="fileName">The name of the PowerShell script to run.</param>
+        /// <param name="configFileName">The name of the configuration file. If you set it to null it will default to <code><paramref name="fileName"/>.config</code>.</param>
         /// <param name="appDomainName">The name of the AppDomain.</param>
         /// <returns>The output of the script as an array of strings.</returns>
         public static string[] RunScriptInNewAppDomain(string fileName, string configFileName = null, string appDomainName = "AppDomainPoshRunner")
@@ -25,7 +25,7 @@ namespace JustAProgrammer.ADPR
             var setupInfo = new AppDomainSetup
                                 {
                                     ApplicationName = appDomainName,
-                                    ConfigurationFile = configFileName ?? string.Format("{0}.config", fileName),
+                                    ConfigurationFile = configFileName ?? string.Format("{0}.config", Path.GetFullPath(fileName)),
                                     // TODO: Perhaps we should setup an even handler to reload the AppDomain similar to ASP.NET in IIS.
                                     ShadowCopyFiles = "true",
                                 };
