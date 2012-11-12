@@ -148,8 +148,41 @@ namespace JustAProgrammer.ADPR
         /// <returns>Throws a NotImplementedException exception.</returns>
         public override KeyInfo ReadKey(ReadKeyOptions options)
         {
+            throw new NotImplementedException("TODO: Verify my ReadKey code works");
             var keyInfo = Console.ReadKey((options & ReadKeyOptions.NoEcho) == ReadKeyOptions.NoEcho);
-            throw new NotImplementedException("TODO: Handle this");
+            ControlKeyStates ctrlKeyState;
+            switch (keyInfo.Modifiers)
+            {
+                case ConsoleModifiers.Control:
+                    ctrlKeyState = ControlKeyStates.LeftCtrlPressed;
+                    break;
+                case ConsoleModifiers.Shift:
+                    ctrlKeyState = ControlKeyStates.ShiftPressed;
+                    break;
+                case ConsoleModifiers.Alt:
+                    ctrlKeyState = ControlKeyStates.LeftAltPressed;
+                    break;
+                case ConsoleModifiers.Control | ConsoleModifiers.Alt:
+                    ctrlKeyState = ControlKeyStates.LeftCtrlPressed | ControlKeyStates.LeftAltPressed;
+                    break;
+                case ConsoleModifiers.Control | ConsoleModifiers.Shift:
+                    ctrlKeyState = ControlKeyStates.LeftCtrlPressed | ControlKeyStates.ShiftPressed;
+                    break;
+                case ConsoleModifiers.Alt | ConsoleModifiers.Shift:
+                    ctrlKeyState = ControlKeyStates.LeftAltPressed | ControlKeyStates.ShiftPressed;
+                    break;
+                default:
+                    ctrlKeyState = 0;
+                    break;
+            }
+            return new KeyInfo
+                       {
+                           Character = keyInfo.KeyChar,
+                           ControlKeyState = ctrlKeyState,
+                           KeyDown = false,
+                           //TODO: Verify this is correct
+                           VirtualKeyCode = (int) keyInfo.Key
+                       };
         }
 
         public override Coordinates CursorPosition

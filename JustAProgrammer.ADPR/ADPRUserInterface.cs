@@ -41,8 +41,18 @@ namespace JustAProgrammer.ADPR
                                                             string message,
                                                             System.Collections.ObjectModel.Collection<FieldDescription> descriptions)
         {
-            throw new NotImplementedException(
-                "The method or operation is not implemented.");
+            if (!string.IsNullOrEmpty(caption)) { WriteVerboseLine(caption); }
+            if (!string.IsNullOrEmpty(message)) { WriteLine(message); }
+
+            var results = new Dictionary<string, PSObject>();
+            foreach (var desc in descriptions)
+            {
+                Write(string.Format("{0}: ", desc.Name));
+                var answer = Console.ReadLine();
+                if (answer == null) { return null; }
+                results[desc.Name] = PSObject.AsPSObject(answer);
+            }
+            return results;
         }
 
         /// <summary>

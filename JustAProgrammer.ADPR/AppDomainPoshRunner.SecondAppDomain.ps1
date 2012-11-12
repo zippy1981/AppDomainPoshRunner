@@ -56,6 +56,15 @@ Write-Warning 'Warning Message';
 # Write-Error will write the whole script
 # Write-Error 'Error Message'
 
+1..3 | %{
+	$name = Read-Host -Prompt "Enter your Name"
+	Start-Sleep -m 5
+	Write-Host "Name: $($name)"
+}
+
+1..10 | %{
 Write-Host "Config File: $([AppDomain]::CurrentDomain.SetupInformation.ConfigurationFile)";
 Add-Type -AssemblyName 'System.Configuration'
 [System.Configuration.ConfigurationManager]::AppSettings| %{ "$($_): $([System.Configuration.ConfigurationManager]::AppSettings[$_])" }
+Start-Sleep -m 500
+}
