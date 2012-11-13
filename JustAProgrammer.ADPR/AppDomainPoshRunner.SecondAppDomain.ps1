@@ -54,7 +54,7 @@ Write-Host 'Host Message';
 Write-Host -ForegroundColor green "Green Text"
 Write-Warning 'Warning Message';
 # Write-Error will write the whole script
-# Write-Error 'Error Message'
+Write-Error 'Error Message'
 
 1..3 | %{
 	$name = Read-Host -Prompt "Enter your Name"
@@ -63,8 +63,8 @@ Write-Warning 'Warning Message';
 }
 
 1..10 | %{
-Write-Host "Config File: $([AppDomain]::CurrentDomain.SetupInformation.ConfigurationFile)";
-Add-Type -AssemblyName 'System.Configuration'
-[System.Configuration.ConfigurationManager]::AppSettings| %{ "$($_): $([System.Configuration.ConfigurationManager]::AppSettings[$_])" }
-Start-Sleep -m 500
+	Write-Host "Config File: $([AppDomain]::CurrentDomain.SetupInformation.ConfigurationFile)";
+	Add-Type -AssemblyName 'System.Configuration'
+	[System.Configuration.ConfigurationManager]::AppSettings| %{ "$($_): $([System.Configuration.ConfigurationManager]::AppSettings[$_])" }
+	Start-Sleep -m 500
 }

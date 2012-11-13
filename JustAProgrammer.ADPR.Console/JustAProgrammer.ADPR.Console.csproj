@@ -82,6 +82,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\JustAProgrammer.ADPR\ADPR.log4net.config">
+      <Link>ADPR.log4net.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="..\JustAProgrammer.ADPR\AppDomainPoshRunner.SecondAppDomain.ps1">
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -90,6 +94,7 @@
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

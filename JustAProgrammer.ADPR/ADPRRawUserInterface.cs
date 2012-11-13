@@ -148,7 +148,7 @@ namespace JustAProgrammer.ADPR
         /// <returns>Throws a NotImplementedException exception.</returns>
         public override KeyInfo ReadKey(ReadKeyOptions options)
         {
-            throw new NotImplementedException("TODO: Verify my ReadKey code works");
+            //throw new NotImplementedException("TODO: Verify my ReadKey code works");
             var keyInfo = Console.ReadKey((options & ReadKeyOptions.NoEcho) == ReadKeyOptions.NoEcho);
             ControlKeyStates ctrlKeyState;
             switch (keyInfo.Modifiers)

@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Host;
+using log4net;
 
 namespace JustAProgrammer.ADPR
 {
@@ -13,10 +14,13 @@ namespace JustAProgrammer.ADPR
     /// <remarks>Based on the msdn page <seealso cref="http://msdn.microsoft.com/en-us/library/windows/desktop/ee706570(v=vs.85).aspx">Writing a Windows PowerShell Host Application</seealso></remarks>
     internal class ADPRUserInterface : PSHostUserInterface
     {
+        private static readonly ILog log = 
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// An instance of the PSRawUserInterface class.
         /// </summary>
-        private PSHostRawUserInterface myRawUi = new ADPRRawUserInterface();
+        private PSHostRawUserInterface rawUi = new ADPRRawUserInterface();
 
         /// <summary>
         /// Gets an instance of the PSRawUserInterface class for this host
@@ -24,7 +28,7 @@ namespace JustAProgrammer.ADPR
         /// </summary>
         public override PSHostRawUserInterface RawUI
         {
-            get { return this.myRawUi; }
+            get { return this.rawUi; }
         }
 
         /// <summary>
@@ -36,10 +40,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="descriptions">A collection of FieldDescription objects that 
         /// describe each field of the prompt.</param>
         /// <returns>Throws a NotImplementedException exception.</returns>
-        public override Dictionary<string, PSObject> Prompt(
-                                                            string caption,
-                                                            string message,
-                                                            System.Collections.ObjectModel.Collection<FieldDescription> descriptions)
+        public override Dictionary<string, PSObject> Prompt(string caption, string message, Collection<FieldDescription> descriptions)
         {
             if (!string.IsNullOrEmpty(caption)) { WriteVerboseLine(caption); }
             if (!string.IsNullOrEmpty(message)) { WriteLine(message); }
@@ -68,7 +69,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="defaultChoice">The index of the label in the Choices parameter 
         /// collection. To indicate no default choice, set to -1.</param>
         /// <returns>Throws a NotImplementedException exception.</returns>
-        public override int PromptForChoice(string caption, string message, System.Collections.ObjectModel.Collection<ChoiceDescription> choices, int defaultChoice)
+        public override int PromptForChoice(string caption, string message, Collection<ChoiceDescription> choices, int defaultChoice)
         {
             throw new NotImplementedException("The method or operation is not implemented.");
         }
@@ -152,8 +153,7 @@ namespace JustAProgrammer.ADPR
 
         /// <summary>
         /// Writes characters to the output display of the host and specifies the 
-        /// foreground and background colors of the characters. This implementation 
-        /// ignores the colors.
+        /// foreground and background colors of the characters.
         /// </summary>
         /// <param name="foregroundColor">The color of the characters.</param>
         /// <param name="backgroundColor">The backgound color to use.</param>
@@ -177,22 +177,16 @@ namespace JustAProgrammer.ADPR
         /// <param name="message">The debug message that is displayed.</param>
         public override void WriteDebugLine(string message)
         {
-            Console.WriteLine(String.Format(
-                                            CultureInfo.CurrentCulture,
-                                            "DEBUG: {0}",
-                                            message));
+            log.Debug(message);
         }
 
         /// <summary>
         /// Writes an error message to the output display of the host.
         /// </summary>
-        /// <param name="value">The error message that is displayed.</param>
-        public override void WriteErrorLine(string value)
+        /// <param name="message">The error message that is displayed.</param>
+        public override void WriteErrorLine(string message)
         {
-            Console.WriteLine(String.Format(
-                                            CultureInfo.CurrentCulture,
-                                            "ERROR: {0}",
-                                            value));
+            log.Error(message);
         }
 
         /// <summary>
@@ -201,7 +195,7 @@ namespace JustAProgrammer.ADPR
         /// </summary>
         public override void WriteLine()
         {
-            Console.WriteLine();
+            log.Info("");
         }
 
         /// <summary>
@@ -211,7 +205,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="value">The line to be written.</param>
         public override void WriteLine(string value)
         {
-            Console.WriteLine(value);
+            log.Info(value);
         }
 
         /// <summary>
@@ -246,7 +240,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="message">The verbose message that is displayed.</param>
         public override void WriteVerboseLine(string message)
         {
-            Console.WriteLine(String.Format(CultureInfo.CurrentCulture, "VERBOSE: {0}", message));
+            log.Debug(message);
         }
 
         /// <summary>
@@ -255,7 +249,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="message">The warning message that is displayed.</param>
         public override void WriteWarningLine(string message)
         {
-            Console.WriteLine(String.Format(CultureInfo.CurrentCulture, "WARNING: {0}", message));
+            log.Warn(message);
         }
     }
 }
