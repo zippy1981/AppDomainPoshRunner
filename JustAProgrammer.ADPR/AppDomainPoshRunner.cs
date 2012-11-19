@@ -46,7 +46,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
         /// <exception cref="FileNotFoundException">Thrown if the <paramref name="file"/> does not exist.</exception>
         /// <returns></returns>
-        public string[] RunScript(Uri file, ADPRHost host = null)
+        internal string[] RunScript(Uri file, ADPRHost host = null)
         {
             if (!File.Exists(file.LocalPath))
             {
@@ -63,7 +63,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="script">The script to run.</param>
         /// <param name="host">An optional existing PSHost to attach the namespace to.</param>
         /// <returns></returns>
-        public string[] RunScript(string script, ADPRHost host = null)
+        internal string[] RunScript(string script, ADPRHost host = null)
         {
             Collection<PSObject> results;
             if (host == null)

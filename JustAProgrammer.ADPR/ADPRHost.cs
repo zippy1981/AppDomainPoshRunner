@@ -80,7 +80,7 @@ namespace JustAProgrammer.ADPR
             get { return GetType().Assembly.GetName().Version; }
         }
 
-        public ADPRHost(ADPRState state)
+        internal ADPRHost(ADPRState state)
         {
             State = state;
         }
