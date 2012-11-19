@@ -1,3 +1,23 @@
-AppDomainPoshRunner, or ADPS for short, is a powershell runner that runs PowerShell scripts in a separate appdomain.
+What is ADPR?
+-------------
 
-Its main purpose is for using powershell to test DLLs and web services, or scripts and odules that wrap around them. This is because once you load a DLL via Add-Type-Path or a Web Service proxy via New-WebServiceProxy, it remains for the life of the powershell instance, even if you reset the runspace. You cannot unload a dll from an AppDomain, and RunSpaces live inside AppDomain's.
+AppDomainPoshRunner, or ADPS for short, is a library and executable for running PowerShell scripts in a separate appdomain.
+
+### Why use ADPR? ###
+
+
+Here are some compelling features:
+
+* A script can have its own app.config separate from powershell.exe.config
+* All outuput is written to a custom implementation of [log4Net.ILog](http://logging.apache.org/log4net/release/sdk/log4net.ILog.html). This means you can have script output sent to many sources.
+
+### What is the status of ADPR ###
+
+ADPR is a little rough around the edges, but quite useable. Because ADPR implements PSHost, the following cmdlets will run:
+
+    Write-Verbose 'Verbose Message';
+    Write-Debug 'Debug Message';
+    Write-Host 'Host Message';
+    Write-Host -ForegroundColor green "Green Text"
+    Write-Warning 'Warning Message';
+    Write-Error 'Error Message'
