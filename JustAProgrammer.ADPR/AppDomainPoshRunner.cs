@@ -17,21 +17,21 @@ namespace JustAProgrammer.ADPR
         /// <param name="configFileName">The name of the configuration file. If you set it to null it will default to <code><paramref name="fileName"/>.config</code>.</param>
         /// <param name="appDomainName">The name of the AppDomain.</param>
         /// <returns>The output of the script as an array of strings.</returns>
-        public static string[] RunScriptInNewAppDomain(string fileName, string configFileName = null, string appDomainName = "AppDomainPoshRunner")
+        public static string[] RunScriptInNewAppDomain(ADPRConfig configuration)
         {
             var assembly = Assembly.GetExecutingAssembly();
             
             var setupInfo = new AppDomainSetup
                                 {
-                                    ApplicationName = appDomainName,
-                                    ConfigurationFile = configFileName ?? string.Format("{0}.config", Path.GetFullPath(fileName)),
+                                    ApplicationName = configuration.AppDomainName,
+                                    ConfigurationFile = configuration.ConfigFile,
                                     // TODO: Perhaps we should setup an even handler to reload the AppDomain similar to ASP.NET in IIS.
-                                    ShadowCopyFiles = "true",
+                                    ShadowCopyFiles = configuration.ShadowCopyFiles.ToString()
                                 };
-            var appDomain = AppDomain.CreateDomain(string.Format("AppDomainPoshRunner-{0}", appDomainName), null, setupInfo);
+            var appDomain = AppDomain.CreateDomain(string.Format("AppDomainPoshRunner-{0}", configuration.AppDomainName), null, setupInfo);
             try {
                 var runner = appDomain.CreateInstanceFromAndUnwrap(assembly.Location, typeof(AppDomainPoshRunner).FullName);
-                return ((AppDomainPoshRunner)runner).RunScript(new Uri(Path.GetFullPath(fileName)));
+                return ((AppDomainPoshRunner)runner).RunScript(new Uri(Path.GetFullPath(configuration.Script)));
             }
             finally
             {

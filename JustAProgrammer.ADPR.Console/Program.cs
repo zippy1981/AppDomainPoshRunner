@@ -11,7 +11,7 @@ namespace JustAProgrammer.ADPR.Console
                 PrintUsage();
                 return 2;
             }
-            var results =  AppDomainPoshRunner.RunScriptInNewAppDomain(args[0]);
+            var results =  AppDomainPoshRunner.RunScriptInNewAppDomain(new ADPRConfig(args[0]));
             foreach (var result in results)
             {
                 System.Console.WriteLine(result);

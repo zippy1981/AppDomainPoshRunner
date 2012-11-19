@@ -72,6 +72,7 @@
     <Compile Include="..\GlobalAssembly.cs">
       <Link>Properties\GlobalAssembly.cs</Link>
     </Compile>
+    <Compile Include="ADPRConfig.cs" />
     <Compile Include="ADPRHost.cs" />
     <Compile Include="ADPRRawUserInterface.cs" />
     <Compile Include="ADPRState.cs" />
