@@ -2,11 +2,12 @@
 using System.Globalization;
 
 using log4net.Core;
+using log4net.Repository;
 using log4net.Util;
 
 namespace JustAProgrammer.ADPR.Log4Net
 {
-    class AdprLog : LogImpl, IADPRLog
+    internal sealed class AdprLog : LogImpl, IADPRLog
     {
 
         /// <summary>
@@ -41,10 +42,28 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// </para>
         /// </remarks>
         /// <seealso cref="LogImpl.IsDebugEnabled"/>
-        virtual public bool IsVerboseEnabled
+        public bool IsVerboseEnabled
         {
             get { return Logger.IsEnabledFor(m_levelVerbose); }
         }
+
+        /// <summary>
+        /// Virtual method called when the configuration of the repository changes
+        /// </summary>
+        /// <param name="repository">the repository holding the levels</param>
+        /// <remarks>
+        /// <para>
+        /// Virtual method called when the configuration of the repository changes
+        /// </para>
+        /// </remarks>
+        protected void ReloadLevels(ILoggerRepository repository)
+        {
+            LevelMap levelMap = repository.LevelMap;
+
+            m_levelVerbose = levelMap.LookupWithDefault(Level.Verbose);
+            base.ReloadLevels(repository);
+        }
+
 
         /// <summary>
         /// Logs a message object with the <c>VERBOSE</c> level.
@@ -69,7 +88,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// <see cref="M:Verbose(object,Exception)"/> form instead.
         /// </para>
         /// </remarks>
-        virtual public void Verbose(object message)
+        public void Verbose(object message)
         {
             Logger.Log(ThisDeclaringType, m_levelVerbose, message, null);
         }
@@ -90,7 +109,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// </para>
         /// </remarks>
         /// <seealso cref="M:Verbose(object)"/>
-        virtual public void Verbose(object message, Exception exception)
+        public void Verbose(object message, Exception exception)
         {
             Logger.Log(ThisDeclaringType, m_levelVerbose, message, exception);
         }
@@ -117,7 +136,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// methods instead.
         /// </para>
         /// </remarks>
-        virtual public void VerboseFormat(string format, object arg0)
+        public void VerboseFormat(string format, object arg0)
         {
             if (IsVerboseEnabled)
             {
@@ -147,7 +166,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// methods instead.
         /// </para>
         /// </remarks>
-        virtual public void VerboseFormat(string format, params object[] args)
+        public void VerboseFormat(string format, params object[] args)
         {
             if (IsVerboseEnabled)
             {
@@ -178,7 +197,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// methods instead.
         /// </para>
         /// </remarks>
-        virtual public void VerboseFormat(string format, object arg0, object arg1)
+        public void VerboseFormat(string format, object arg0, object arg1)
         {
             if (IsVerboseEnabled)
             {
@@ -210,7 +229,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// methods instead.
         /// </para>
         /// </remarks>
-        virtual public void VerboseFormat(string format, object arg0, object arg1, object arg2)
+        public void VerboseFormat(string format, object arg0, object arg1, object arg2)
         {
             if (IsVerboseEnabled)
             {
@@ -236,7 +255,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// methods instead.
         /// </para>
         /// </remarks>
-        virtual public void VerboseFormat(IFormatProvider provider, string format, params object[] args)
+        public void VerboseFormat(IFormatProvider provider, string format, params object[] args)
         {
             if (IsVerboseEnabled)
             {

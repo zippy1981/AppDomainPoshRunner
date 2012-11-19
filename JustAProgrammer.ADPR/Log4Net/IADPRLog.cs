@@ -7,7 +7,7 @@ using log4net.Core;
 
 namespace JustAProgrammer.ADPR.Log4Net
 {
-    interface IADPRLog :ILog
+    internal interface IADPRLog :ILog
     {
 
         /// <summary>
