@@ -13,7 +13,7 @@ Here are some compelling features:
 
 ### What is the status of ADPR ###
 
-ADPR is a little rough around the edges, but quite useable. Because ADPR implements PSHost, the following cmdlets will run:
+ADPR is a little rough around the edges, but quite useable. Because ADPR implements [PSHost](http://msdn.microsoft.com/en-us/library/system.management.automation.host.pshost(VS.85).aspx), the following cmdlets will run:
 
     Write-Verbose 'Verbose Message';
     Write-Debug 'Debug Message';
