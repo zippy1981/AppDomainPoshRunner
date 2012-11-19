@@ -1,0 +1,3 @@
+[submodule "log4net"]
+	path = log4net
+	url = git@github.com:zippy1981/log4net.git
