@@ -240,7 +240,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="message">The verbose message that is displayed.</param>
         public override void WriteVerboseLine(string message)
         {
-            log.Debug(message);
+            log.Verbose(message);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace JustAProgrammer.ADPR
         /// <param name="message">The warning message that is displayed.</param>
         public override void WriteWarningLine(string message)
         {
-            log.Warn(message);
+            log.Verbose(message);
         }
     }
 }

@@ -54,7 +54,7 @@ Write-Host 'Host Message';
 Write-Host -ForegroundColor green "Green Text"
 Write-Warning 'Warning Message';
 # Write-Error will write the whole script
-Write-Error 'Error Message'
+# Write-Error 'Error Message'
 
 1..3 | %{
 	$name = Read-Host -Prompt "Enter your Name"
