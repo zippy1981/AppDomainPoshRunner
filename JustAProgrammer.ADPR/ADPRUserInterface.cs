@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Host;
+using JustAProgrammer.ADPR.Log4Net;
 using log4net;
 
 namespace JustAProgrammer.ADPR
@@ -14,8 +15,8 @@ namespace JustAProgrammer.ADPR
     /// <remarks>Based on the msdn page <seealso cref="http://msdn.microsoft.com/en-us/library/windows/desktop/ee706570(v=vs.85).aspx">Writing a Windows PowerShell Host Application</seealso></remarks>
     internal class ADPRUserInterface : PSHostUserInterface
     {
-        private static readonly ILog log = 
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly IADPRLog log = 
+            ADPRLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// An instance of the PSRawUserInterface class.

@@ -12,7 +12,7 @@ namespace JustAProgrammer.ADPR
         
         public string ConfigFile
         {
-            get { return _configFile ?? string.Format("{0}.config", Path.GetFullPath(_configFile)); }
+            get { return _configFile ?? string.Format("{0}.config", Path.GetFullPath(Script)); }
             set { _configFile = value; }
         }
 

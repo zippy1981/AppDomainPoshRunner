@@ -79,6 +79,7 @@
     <Compile Include="AppDomainPoshRunner.cs" />
     <Compile Include="ADPRUserInterface.cs" />
     <Compile Include="Log4Net\AdprLog.cs" />
+    <Compile Include="Log4Net\ADPRLogManager.cs" />
     <Compile Include="Log4Net\IADPRLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

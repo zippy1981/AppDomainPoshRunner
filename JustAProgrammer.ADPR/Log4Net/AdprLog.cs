@@ -56,7 +56,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// Virtual method called when the configuration of the repository changes
         /// </para>
         /// </remarks>
-        protected void ReloadLevels(ILoggerRepository repository)
+        protected override void ReloadLevels(ILoggerRepository repository)
         {
             LevelMap levelMap = repository.LevelMap;
 
