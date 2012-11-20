@@ -17,6 +17,8 @@ namespace JustAProgrammer.ADPR.Console
                 System.Console.WriteLine(result);
             }
             // TODO: Get the state from the PSHost
+            // TODO if parent is console.exe present the press any key to continue prompt.
+
             return 0;
         }
 
