@@ -37,7 +37,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// </value>
         /// <remarks>
         /// <para>
-        /// See <see cref="IsDebugEnabled"/> for more information and examples 
+        /// See <see cref="LogImpl.IsDebugEnabled"/> for more information and examples 
         /// of using this method.
         /// </para>
         /// </remarks>
