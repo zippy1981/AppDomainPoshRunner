@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace JustAProgrammer.ADPR
 {
     /// <summary>
     /// Configuration for an ADPR Appdomain.
     /// </summary>
+    [Serializable]
     public sealed class ADPRConfig
     {
         private string _configFile;
@@ -16,6 +18,8 @@ namespace JustAProgrammer.ADPR
             set { _configFile = value; }
         }
 
+        public string Log4NetConfigFile { get; set; }
+
         public string AppDomainName { get; set; }
 
         public bool ShadowCopyFiles { get; set; }
@@ -23,9 +27,10 @@ namespace JustAProgrammer.ADPR
         public ADPRConfig()
         {
             AppDomainName = "AppDomainPoshRunner";
+            Log4NetConfigFile = "ADPR.log4net.config";
         }
 
-        public ADPRConfig(string fileName)
+        public ADPRConfig(string fileName) : this()
         {
             Script = fileName;
         }

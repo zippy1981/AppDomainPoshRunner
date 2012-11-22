@@ -5,11 +5,21 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Reflection;
+using System.Runtime.Remoting.Activation;
+using log4net.Config;
 
 namespace JustAProgrammer.ADPR
 {
     public sealed class AppDomainPoshRunner : MarshalByRefObject
     {
+        private ADPRConfig _config;
+
+        public AppDomainPoshRunner(ADPRConfig config)
+        {
+            _config = config;
+            XmlConfigurator.Configure(new FileInfo(config.Log4NetConfigFile));
+        }
+
         /// <summary>
         /// Created a new <see cref="AppDomain"/> and runs the given PowerShell script.
         /// </summary>
@@ -30,7 +40,7 @@ namespace JustAProgrammer.ADPR
                                 };
             var appDomain = AppDomain.CreateDomain(string.Format("AppDomainPoshRunner-{0}", configuration.AppDomainName), null, setupInfo);
             try {
-                var runner = appDomain.CreateInstanceFromAndUnwrap(assembly.Location, typeof(AppDomainPoshRunner).FullName);
+                var runner = appDomain.CreateInstanceFromAndUnwrap(assembly.Location, typeof(AppDomainPoshRunner).FullName, false, 0, null, new object[] {configuration}, null, null);
                 return ((AppDomainPoshRunner)runner).RunScript(new Uri(Path.GetFullPath(configuration.Script)));
             }
             finally
