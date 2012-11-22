@@ -61,7 +61,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// <returns>The wrapper for the logger specified</returns>
         private static ILoggerWrapper WrapperCreationHandler(ILogger logger)
         {
-            return new AdprLog(logger);
+            return new ADPRLog(logger);
         }
     }
 }

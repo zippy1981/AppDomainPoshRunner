@@ -7,7 +7,7 @@ using log4net.Util;
 
 namespace JustAProgrammer.ADPR.Log4Net
 {
-    internal sealed class AdprLog : LogImpl, IADPRLog
+    internal sealed class ADPRLog : LogImpl, IADPRLog
     {
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace JustAProgrammer.ADPR.Log4Net
         /// The specified logger to wrap.
         /// </para>
         /// </remarks>
-        public AdprLog(ILogger logger) : base(logger) { }
+        public ADPRLog(ILogger logger) : base(logger) { }
 
         /// <summary>
         /// Checks if this logger is enabled for the <c>INFO</c> level.
