@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-
+using System.Text;
 using NMaier.GetOptNet;
 
 namespace JustAProgrammer.ADPR.Console
@@ -19,7 +20,7 @@ namespace JustAProgrammer.ADPR.Console
                 Log4NetConfigFile = Path.Combine(Directory.GetParent(Assembly.GetEntryAssembly().Location).FullName, "ADPR.log4net.config");
             }
 
-            [Argument("Script", Helptext = "Name of the script to run. ", Helpvar = "script", Required = true)] 
+            [Argument("Script", Helptext = "Name of the script to run. ", Helpvar = "script")] 
             [ArgumentAlias("File")]
             [ShortArgument('f')]
             public string Script { get; set; }
@@ -43,10 +44,15 @@ namespace JustAProgrammer.ADPR.Console
             public bool ShadowCopyFiles { get; set; }
 
             [FlagArgument(true)]
-            [Argument("Help", Helptext = "Show help")]
+            [Argument("Help", Helptext = "Show help and exit")]
             [ShortArgument('h')]
             [ShortArgumentAlias('?')]
             public bool Help { get; set; }
+
+            [FlagArgument(true)]
+            [Argument("Version", Helptext = "Show version info and exit")]
+            [ShortArgument('v')]
+            public bool Version { get; set; }
 
             /// <remarks>This is needed because <see cref="Opts"/> can't be serialized sine its inherits from <see cref="GetOpt"/></remarks>
             /// <returns>The class converted to an ADPRConfig file.</returns>
@@ -76,6 +82,12 @@ namespace JustAProgrammer.ADPR.Console
                     opts.PrintUsage();
                     return 0;
                 }
+                if (opts.Version)
+                {
+                    //TODO: USage should go to the log4net appenders in this case
+                    System.Console.WriteLine(GetVersionString());
+                    return 0;
+                }
                 if (string.IsNullOrWhiteSpace(opts.Script))
                 {
                     throw new GetOptException("Most specify a script!");
@@ -103,6 +115,21 @@ namespace JustAProgrammer.ADPR.Console
             // TODO if parent is console.exe present the press any key to continue prompt.
 
             return 0;
+        }
+
+        /// <summary>
+        /// Generates the text displayed by <c>-v</c> and <c>--version</c>
+        /// </summary>
+        /// <returns></returns>
+        private static string GetVersionString()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var ret = new StringBuilder();
+            ret.AppendFormat("{0} Version {1}", Path.GetFileName(assembly.Location), assembly.GetName().Version);
+            ret.AppendLine();
+            ret.AppendLine(fvi.LegalCopyright);
+            return ret.ToString();
         }
     }
 }

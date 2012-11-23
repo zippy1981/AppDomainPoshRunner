@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Just A Programmer LLC")]
 [assembly: AssemblyProduct("AppDomainPowershellRunner")]
-[assembly: AssemblyCopyright("Copyright © Just A Programmer LLC 2011")]
+[assembly: AssemblyCopyright("Copyright © Just A Programmer LLC 2011-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
