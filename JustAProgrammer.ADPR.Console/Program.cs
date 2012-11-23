@@ -24,15 +24,10 @@ namespace JustAProgrammer.ADPR.Console
             }
 
 
-            [Parameters(Exact = 1)]
-            public List<string> Parameters = new List<string>(1);
-
-            public string Script {
-                get
-                {
-                    return Parameters == null ? null : Parameters[0];
-                } 
-            }
+            [Argument("Script", Helptext = "Name of the script to run. ", Helpvar = "script", Required = true)] 
+            [ArgumentAlias("File")]
+            [ShortArgument('f')]
+            public string Script { get; set; }
 
             private string _configFile;
             [Argument("Config", Helptext = "The name of the app.config file for the script. Default is scriptName.config", Helpvar = "configFile")]
