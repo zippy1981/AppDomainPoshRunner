@@ -57,6 +57,9 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GetOptNet">
+      <HintPath>..\packages\GetOptNet.1.0.1.0\lib\net30\GetOptNet.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=23c9591f2b16657b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
@@ -73,12 +76,13 @@
     <Compile Include="..\GlobalAssembly.cs">
       <Link>Properties\GlobalAssembly.cs</Link>
     </Compile>
-    <Compile Include="ADPRConfig.cs" />
     <Compile Include="ADPRHost.cs" />
+    <Compile Include="ADPRConfig.cs" />
     <Compile Include="ADPRRawUserInterface.cs" />
     <Compile Include="ADPRState.cs" />
     <Compile Include="AppDomainPoshRunner.cs" />
     <Compile Include="ADPRUserInterface.cs" />
+    <Compile Include="IADPRConfig.cs" />
     <Compile Include="Log4Net\ADPRLog.cs" />
     <Compile Include="Log4Net\ADPRLogManager.cs" />
     <Compile Include="Log4Net\IADPRLog.cs" />

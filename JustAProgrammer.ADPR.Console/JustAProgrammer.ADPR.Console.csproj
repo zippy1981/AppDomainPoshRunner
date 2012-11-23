@@ -57,6 +57,7 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GetOptNet, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c9bf2c3a9070fff0, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -103,7 +104,7 @@ set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25\poshrunner.exe
 set ILMERGE_
 echo Creating %25ILMERGE_TARGETPATH%25" 
 mkdir "%25ILMERGE_TARGETDIR%25" 2&gt; NUL
-"%25ILMERGE_EXE%25" /verbose "/out:%25ILMERGE_TARGETPATH%25" "$(TargetPath)" "/attr:$(TargetDir)\JustAProgrammer.ADPR.dll" "$(TargetDir)\JustAProgrammer.ADPR.dll" "$(TargetDir)\log4net.dll"
+"%25ILMERGE_EXE%25" /verbose "/out:%25ILMERGE_TARGETPATH%25" "$(TargetPath)" "$(TargetDir)\JustAProgrammer.ADPR.dll" "$(TargetDir)\log4net.dll"
 copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1" "%25ILMERGE_TARGETDIR%25"
 copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1.config" "%25ILMERGE_TARGETDIR%25"
 copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuildEvent>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>GetOptNet</id>
+    <version>1.0.1.0</version>
+    <title>GetOptNet class library</title>
+    <authors>Nils Maier</authors>
+    <owners>Nils Maier</owners>
+    <licenseUrl>https://raw.github.com/nmaier/getoptnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/nmaier/getoptnet</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Commandline Argument Parser for .Net</description>
+    <releaseNotes>Added some nuspec tags and figured out build config</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>GetOpt option options optparse arguments args argparse</tags>
+  </metadata>
+</package>

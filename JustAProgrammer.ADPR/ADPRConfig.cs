@@ -1,22 +1,16 @@
 ﻿using System;
-using System.IO;
 
 namespace JustAProgrammer.ADPR
 {
-    /// <summary>
-    /// Configuration for an ADPR Appdomain.
-    /// </summary>
     [Serializable]
-    public sealed class ADPRConfig
+    public  class ADPRConfig : IADPRConfig
     {
-        private string _configFile;
-        public string Script { get; set; }
-        
-        public string ConfigFile
-        {
-            get { return _configFile ?? string.Format("{0}.config", Path.GetFullPath(Script)); }
-            set { _configFile = value; }
-        }
+        /// <remarks>Despite what ReSharper says, this explicit constructor is necessary for serialization.</remarks>
+        public ADPRConfig() { }
+
+        public virtual string Script { get; set; }
+
+        public string ConfigFile { get; set; }
 
         public string Log4NetConfigFile { get; set; }
 
@@ -24,15 +18,7 @@ namespace JustAProgrammer.ADPR
 
         public bool ShadowCopyFiles { get; set; }
 
-        public ADPRConfig()
-        {
-            AppDomainName = "AppDomainPoshRunner";
-            Log4NetConfigFile = "ADPR.log4net.config";
-        }
+        public bool Help { get; set; }
 
-        public ADPRConfig(string fileName) : this()
-        {
-            Script = fileName;
-        }
     }
 }

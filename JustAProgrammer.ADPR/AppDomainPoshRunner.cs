@@ -5,14 +5,14 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Reflection;
-using System.Runtime.Remoting.Activation;
+
 using log4net.Config;
 
 namespace JustAProgrammer.ADPR
 {
     public sealed class AppDomainPoshRunner : MarshalByRefObject
     {
-        private ADPRConfig _config;
+        private IADPRConfig _config;
 
         public AppDomainPoshRunner(ADPRConfig config)
         {
