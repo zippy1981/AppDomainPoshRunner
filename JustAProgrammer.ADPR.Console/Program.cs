@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
 using NMaier.GetOptNet;
 
-
 namespace JustAProgrammer.ADPR.Console
 {
-    
-
     class Program
     {
         [Serializable]
@@ -22,7 +18,6 @@ namespace JustAProgrammer.ADPR.Console
                 AppDomainName = "AppDomainPoshRunner";
                 Log4NetConfigFile = Path.Combine(Directory.GetParent(Assembly.GetEntryAssembly().Location).FullName, "ADPR.log4net.config");
             }
-
 
             [Argument("Script", Helptext = "Name of the script to run. ", Helpvar = "script", Required = true)] 
             [ArgumentAlias("File")]
