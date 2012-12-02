@@ -3,8 +3,16 @@ What is ADPR?
 
 AppDomainPoshRunner, or ADPS for short, is a library and executable for running PowerShell scripts in a separate appdomain.
 
-### Why use ADPR? ###
+### Usage examples ###
 
+Included in the zip file is AppDomainPoshRunner.SecondAppDomain.ps1, so you can run these examples by unzipping the files, opening a command prompt, and cd-ing to the directory you unzipped the files to
+
+    REM run AppDomainPoshRunner.SecondAppDomain.ps1 and write output to the console
+    poshrunner -f AppDomainPoshRunner.SecondAppDomain.ps1
+	REM run AppDomainPoshRunner.SecondAppDomain.ps1 and write output to poshrunner.log
+	poshrunner -f AppDomainPoshRunner.SecondAppDomain.ps1 --log4netConfigType=File
+
+### Why use ADPR? ###
 
 Here are some compelling features:
 
