@@ -20,15 +20,14 @@ namespace JustAProgrammer.ADPR
             Stream xmlConfigStream = null;
             switch (config.Log4NetConfigType)
             {
-                case Log4NetConfigType.CustomFile:
+                case Log4NetConfigType.Custom:
                     xmlConfigStream = File.OpenRead(config.Log4NetConfigFile);
                     break;
-                case Log4NetConfigType.ColoredConsoleAppender:
+                case Log4NetConfigType.Console:
                     xmlConfigStream = Assembly.GetExecutingAssembly()
                             .GetManifestResourceStream("JustAProgrammer.ADPR.ColoredConsoleAppender.log4net.config");
                     break;
-                case Log4NetConfigType.RollingFileAppender:
-                    throw new NotFiniteNumberException("TODO: Write this appender");
+                case Log4NetConfigType.File:
                     xmlConfigStream = Assembly.GetExecutingAssembly()
                             .GetManifestResourceStream("JustAProgrammer.ADPR.RollingFileAppender.log4net.config");
                     break;
@@ -36,6 +35,8 @@ namespace JustAProgrammer.ADPR
                     throw new ArgumentOutOfRangeException();
             }
             XmlConfigurator.Configure(xmlConfigStream);
+            xmlConfigStream.Close();
+            xmlConfigStream.Dispose();
         }
 
         /// <summary>

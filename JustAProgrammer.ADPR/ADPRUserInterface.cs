@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 using JustAProgrammer.ADPR.Log4Net;
 using log4net;
+using log4net.Appender;
 
 namespace JustAProgrammer.ADPR
 {
@@ -164,12 +166,16 @@ namespace JustAProgrammer.ADPR
                                    ConsoleColor backgroundColor,
                                    string value)
         {
+            // TODO: Implement colors
+            /*
             var oldColors = new[] {Console.ForegroundColor, Console.BackgroundColor};
             Console.ForegroundColor = foregroundColor;
             Console.BackgroundColor = backgroundColor;
             Console.Write(value);
             Console.ForegroundColor = oldColors[0];
             Console.BackgroundColor = oldColors[1];
+             */
+            log.Info(value);
         }
 
         /// <summary>
@@ -218,12 +224,17 @@ namespace JustAProgrammer.ADPR
         /// <param name="value">The line to be written.</param>
         public override void WriteLine(ConsoleColor foregroundColor, ConsoleColor backgroundColor, string value)
         {
-            var oldColors = new[] { Console.ForegroundColor, Console.BackgroundColor };
+
+            // TODO: Implement colors
+            /*
+            var oldColors = new[] {Console.ForegroundColor, Console.BackgroundColor};
             Console.ForegroundColor = foregroundColor;
             Console.BackgroundColor = backgroundColor;
             Console.WriteLine(value);
             Console.ForegroundColor = oldColors[0];
             Console.BackgroundColor = oldColors[1];
+             */
+            log.Info(value);
         }
 
         /// <summary>

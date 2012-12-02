@@ -95,6 +95,9 @@
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\JustAProgrammer.ADPR\RollingFileAppender.log4net.config">
+      <Link>RollingFileAppender.log4net.config</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

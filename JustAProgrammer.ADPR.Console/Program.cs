@@ -18,7 +18,7 @@ namespace JustAProgrammer.ADPR.Console
             {
                 AppDomainName = "AppDomainPoshRunner";
                 Log4NetConfigFile = null;
-                Log4NetConfigType = Log4NetConfigType.ColoredConsoleAppender;
+                Log4NetConfigType = Log4NetConfigType.Console;
             }
 
             [Argument("Script", Helptext = "Name of the script to run. ", Helpvar = "script")] 
@@ -109,7 +109,7 @@ namespace JustAProgrammer.ADPR.Console
                         //TODO: GetOptException needs a constuctor that takes an inner exception.
                         throw new GetOptException(string.Format("Log4net config file {0} not found.", opts.Log4NetConfigFile));
                     }
-                    opts.Log4NetConfigType = Log4NetConfigType.CustomFile;
+                    opts.Log4NetConfigType = Log4NetConfigType.Custom;
                 }
             }
             catch (GetOptException ex)
