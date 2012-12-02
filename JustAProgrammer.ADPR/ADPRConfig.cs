@@ -11,6 +11,8 @@ namespace JustAProgrammer.ADPR
         public virtual string Script { get; set; }
 
         public string ConfigFile { get; set; }
+        
+        public Log4NetConfigType Log4NetConfigType { get; set; }
 
         public string Log4NetConfigFile { get; set; }
 
@@ -19,6 +21,5 @@ namespace JustAProgrammer.ADPR
         public bool ShadowCopyFiles { get; set; }
 
         public bool Help { get; set; }
-
     }
 }

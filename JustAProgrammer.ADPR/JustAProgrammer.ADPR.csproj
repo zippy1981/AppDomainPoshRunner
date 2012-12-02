@@ -83,13 +83,14 @@
     <Compile Include="AppDomainPoshRunner.cs" />
     <Compile Include="ADPRUserInterface.cs" />
     <Compile Include="IADPRConfig.cs" />
+    <Compile Include="Log4NetConfigType.cs" />
     <Compile Include="Log4Net\ADPRLog.cs" />
     <Compile Include="Log4Net\ADPRLogManager.cs" />
     <Compile Include="Log4Net\IADPRLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ADPR.log4net.config" />
+    <EmbeddedResource Include="ColoredConsoleAppender.log4net.config" />
     <None Include="AppDomainPoshRunner.SecondAppDomain.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

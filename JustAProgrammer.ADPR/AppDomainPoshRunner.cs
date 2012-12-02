@@ -17,7 +17,25 @@ namespace JustAProgrammer.ADPR
         public AppDomainPoshRunner(ADPRConfig config)
         {
             _config = config;
-            XmlConfigurator.Configure(new FileInfo(config.Log4NetConfigFile));
+            Stream xmlConfigStream = null;
+            switch (config.Log4NetConfigType)
+            {
+                case Log4NetConfigType.CustomFile:
+                    xmlConfigStream = File.OpenRead(config.Log4NetConfigFile);
+                    break;
+                case Log4NetConfigType.ColoredConsoleAppender:
+                    xmlConfigStream = Assembly.GetExecutingAssembly()
+                            .GetManifestResourceStream("JustAProgrammer.ADPR.ColoredConsoleAppender.log4net.config");
+                    break;
+                case Log4NetConfigType.RollingFileAppender:
+                    throw new NotFiniteNumberException("TODO: Write this appender");
+                    xmlConfigStream = Assembly.GetExecutingAssembly()
+                            .GetManifestResourceStream("JustAProgrammer.ADPR.RollingFileAppender.log4net.config");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            XmlConfigurator.Configure(xmlConfigStream);
         }
 
         /// <summary>

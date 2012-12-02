@@ -83,8 +83,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\JustAProgrammer.ADPR\ADPR.log4net.config">
-      <Link>ADPR.log4net.config</Link>
+    <Content Include="..\JustAProgrammer.ADPR\ColoredConsoleAppender.log4net.config">
+      <Link>ColoredConsoleAppender.log4net.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="..\JustAProgrammer.ADPR\AppDomainPoshRunner.SecondAppDomain.ps1">
@@ -104,10 +104,10 @@ set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25\poshrunner.exe
 set ILMERGE_
 echo Creating %25ILMERGE_TARGETPATH%25" 
 mkdir "%25ILMERGE_TARGETDIR%25" 2&gt; NUL
-"%25ILMERGE_EXE%25" /verbose "/out:%25ILMERGE_TARGETPATH%25" "$(TargetPath)" "$(TargetDir)\JustAProgrammer.ADPR.dll" "$(TargetDir)\log4net.dll"
+"%25ILMERGE_EXE%25" /verbose "/out:%25ILMERGE_TARGETPATH%25" "$(TargetPath)" "$(TargetDir)\JustAProgrammer.ADPR.dll" "$(TargetDir)\log4net.dll" "$(TargetDir)\GetOptNet.dll"
 copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1" "%25ILMERGE_TARGETDIR%25"
 copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1.config" "%25ILMERGE_TARGETDIR%25"
-copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuildEvent>
+REM copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

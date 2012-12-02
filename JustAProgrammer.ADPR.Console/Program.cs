@@ -17,7 +17,8 @@ namespace JustAProgrammer.ADPR.Console
             public Opts()
             {
                 AppDomainName = "AppDomainPoshRunner";
-                Log4NetConfigFile = Path.Combine(Directory.GetParent(Assembly.GetEntryAssembly().Location).FullName, "ADPR.log4net.config");
+                Log4NetConfigFile = null;
+                Log4NetConfigType = Log4NetConfigType.ColoredConsoleAppender;
             }
 
             [Argument("Script", Helptext = "Name of the script to run. ", Helpvar = "script")] 
@@ -32,6 +33,9 @@ namespace JustAProgrammer.ADPR.Console
                 get { return _configFile ?? string.Format("{0}.config", Path.GetFullPath(Script)); }
                 set { _configFile = value; }
             }
+
+            [Argument("Log4NetConfigType", Helptext = "The type of Log4Net configuration.")]
+            public Log4NetConfigType Log4NetConfigType { get; set; }
             
             [Argument("Log4NetConfig", Helptext = "Override the default config file for log4net.", Helpvar = "log4NetConfigFile")]
             public string Log4NetConfigFile { get; set; }
@@ -62,6 +66,7 @@ namespace JustAProgrammer.ADPR.Console
                            {
                                Script = Script,
                                AppDomainName = AppDomainName,
+                               Log4NetConfigType = Log4NetConfigType,
                                Log4NetConfigFile = Log4NetConfigFile,
                                ConfigFile = ConfigFile,
                                Help = Help,
@@ -78,13 +83,13 @@ namespace JustAProgrammer.ADPR.Console
                 opts.Parse(args);
                 if (opts.Help)
                 {
-                    //TODO: USage should go to the log4net appenders in this case
+                    //TODO: Usage should go to the log4net appenders in this case
                     opts.PrintUsage();
                     return 0;
                 }
                 if (opts.Version)
                 {
-                    //TODO: USage should go to the log4net appenders in this case
+                    //TODO: Usage should go to the log4net appenders in this case
                     System.Console.WriteLine(GetVersionString());
                     return 0;
                 }
@@ -95,7 +100,16 @@ namespace JustAProgrammer.ADPR.Console
                 if (!File.Exists(opts.Script))
                 {
                     //TODO: GetOptException needs a constuctor that takes an inner exception.
-                    throw new GetOptException(string.Format("Script {0} not found.", opts.Script)); 
+                    throw new GetOptException(string.Format("Script {0} not found.", opts.Script));
+                }
+                if (!string.IsNullOrWhiteSpace(opts.Log4NetConfigFile))
+                {
+                    if (!File.Exists(opts.Log4NetConfigFile))
+                    {
+                        //TODO: GetOptException needs a constuctor that takes an inner exception.
+                        throw new GetOptException(string.Format("Log4net config file {0} not found.", opts.Log4NetConfigFile));
+                    }
+                    opts.Log4NetConfigType = Log4NetConfigType.CustomFile;
                 }
             }
             catch (GetOptException ex)
