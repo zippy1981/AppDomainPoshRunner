@@ -11,5 +11,6 @@ namespace JustAProgrammer.ADPR
         string Log4NetConfigFile { get; }
         string AppDomainName { get; }
         bool ShadowCopyFiles { get; }
+        PoshVer PowerShellVersion { get; }
     }
 }

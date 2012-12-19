@@ -21,5 +21,7 @@ namespace JustAProgrammer.ADPR
         public bool ShadowCopyFiles { get; set; }
 
         public bool Help { get; set; }
+
+        public PoshVer PowerShellVersion { get; set; }
     }
 }

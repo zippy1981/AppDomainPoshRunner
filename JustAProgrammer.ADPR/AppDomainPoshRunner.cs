@@ -17,6 +17,25 @@ namespace JustAProgrammer.ADPR
         public AppDomainPoshRunner(ADPRConfig config)
         {
             _config = config;
+            Assembly automation;
+            switch (_config.PowerShellVersion)
+            {
+                case PoshVer.Default:
+                    break;
+                case PoshVer.PowerShell1:
+                case PoshVer.PowerShell2:
+
+                    automation = AppDomain.CurrentDomain.Load
+                        ("System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+                    break;
+                case PoshVer.PowerShell3:
+                    automation = AppDomain.CurrentDomain.Load
+                        ("System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("configuration.PowerShellVersion");
+            }
+
             Stream xmlConfigStream = null;
             switch (config.Log4NetConfigType)
             {
@@ -55,7 +74,7 @@ namespace JustAProgrammer.ADPR
                                     ApplicationName = configuration.AppDomainName,
                                     ConfigurationFile = configuration.ConfigFile,
                                     // TODO: Perhaps we should setup an even handler to reload the AppDomain similar to ASP.NET in IIS.
-                                    ShadowCopyFiles = configuration.ShadowCopyFiles.ToString()
+                                    ShadowCopyFiles = configuration.ShadowCopyFiles.ToString(),
                                 };
             var appDomain = AppDomain.CreateDomain(string.Format("AppDomainPoshRunner-{0}", configuration.AppDomainName), null, setupInfo);
             try {

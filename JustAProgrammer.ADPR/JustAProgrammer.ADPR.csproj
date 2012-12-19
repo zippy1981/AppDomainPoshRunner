@@ -34,7 +34,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>JustAProgrammer.ADPR.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>JustAProgrammer.ADPR.pfx.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -66,10 +66,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Reference Assemblies\Microsoft\WindowsPowerShell\v1.0\System.Management.Automation.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Management.Automation"/>
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +84,7 @@
     <Compile Include="Log4Net\ADPRLog.cs" />
     <Compile Include="Log4Net\ADPRLogManager.cs" />
     <Compile Include="Log4Net\IADPRLog.cs" />
+    <Compile Include="PoshVer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,8 +96,8 @@
     <None Include="AppDomainPoshRunner.Tester.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="JustAProgrammer.ADPR.pfx" />
     <EmbeddedResource Include="RollingFileAppender.log4net.config" />
+    <None Include="JustAProgrammer.ADPR.pfx.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

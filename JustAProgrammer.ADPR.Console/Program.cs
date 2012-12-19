@@ -19,6 +19,7 @@ namespace JustAProgrammer.ADPR.Console
                 AppDomainName = "AppDomainPoshRunner";
                 Log4NetConfigFile = null;
                 Log4NetConfigType = Log4NetConfigType.Console;
+                PowerShellVersion = PoshVer.Default;
             }
 
             [Argument("Script", Helptext = "Name of the script to run. ", Helpvar = "script")] 
@@ -47,6 +48,9 @@ namespace JustAProgrammer.ADPR.Console
             [Argument("ShadowCopy", Helptext = "Enable Assembly ShadowCopying.")]
             public bool ShadowCopyFiles { get; set; }
 
+            [Argument("PSVersion", Helptext = "The PowerShell version")]
+            public PoshVer PowerShellVersion { get; set; }
+
             [FlagArgument(true)]
             [Argument("Help", Helptext = "Show help and exit")]
             [ShortArgument('h')]
@@ -70,7 +74,8 @@ namespace JustAProgrammer.ADPR.Console
                                Log4NetConfigFile = Log4NetConfigFile,
                                ConfigFile = ConfigFile,
                                Help = Help,
-                               ShadowCopyFiles = ShadowCopyFiles
+                               ShadowCopyFiles = ShadowCopyFiles,
+                               PowerShellVersion = PowerShellVersion
                            };
             }
         }
