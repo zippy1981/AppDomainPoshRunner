@@ -5,7 +5,7 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Reflection;
-
+using System.Security.Policy;
 using log4net.Config;
 
 namespace JustAProgrammer.ADPR
@@ -17,7 +17,6 @@ namespace JustAProgrammer.ADPR
         public AppDomainPoshRunner(ADPRConfig config)
         {
             _config = config;
-            Assembly automation;
             switch (_config.PowerShellVersion)
             {
                 case PoshVer.Default:
@@ -25,12 +24,10 @@ namespace JustAProgrammer.ADPR
                 case PoshVer.PowerShell1:
                 case PoshVer.PowerShell2:
 
-                    automation = AppDomain.CurrentDomain.Load
-                        ("System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+                    Assembly.Load("System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
                     break;
                 case PoshVer.PowerShell3:
-                    automation = AppDomain.CurrentDomain.Load
-                        ("System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+                    Assembly.Load("System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("configuration.PowerShellVersion");
