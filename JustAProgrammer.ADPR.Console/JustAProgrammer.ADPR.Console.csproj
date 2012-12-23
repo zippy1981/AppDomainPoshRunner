@@ -57,13 +57,11 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GetOptNet, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c9bf2c3a9070fff0, processorArchitecture=MSIL" />
+    <Reference Include="GetOptNet, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c9bf2c3a9070fff0, processorArchitecture=MSIL">
+      <HintPath>..\packages\GetOptNet.1.0.1.0\lib\net30\GetOptNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Reference Assemblies\Microsoft\WindowsPowerShell\v1.0\System.Management.Automation.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -83,10 +81,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\JustAProgrammer.ADPR\ColoredConsoleAppender.log4net.config">
-      <Link>ColoredConsoleAppender.log4net.config</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="..\JustAProgrammer.ADPR\AppDomainPoshRunner.SecondAppDomain.ps1">
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -94,9 +88,6 @@
     <None Include="..\JustAProgrammer.ADPR\AppDomainPoshRunner.SecondAppDomain.ps1.config">
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\JustAProgrammer.ADPR\RollingFileAppender.log4net.config">
-      <Link>RollingFileAppender.log4net.config</Link>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
