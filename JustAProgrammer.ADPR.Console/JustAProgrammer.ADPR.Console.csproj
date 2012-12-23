@@ -92,7 +92,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set ILMERGE_EXE=$(SolutionDir)\packages\ILRepack.1.19\tools\ILRepack.exe
+    <PostBuildEvent>set ILMERGE_EXE=$(SolutionDir)\packages\ILRepack.1.20\tools\ILRepack.exe
 set ILMERGE_TARGETDIR=$(SolutionDir)\PoshRunner\$(OutDir)
 set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25\poshrunner.exe
 set ILMERGE_
