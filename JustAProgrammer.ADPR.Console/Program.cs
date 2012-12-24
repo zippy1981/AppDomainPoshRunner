@@ -93,7 +93,7 @@ namespace JustAProgrammer.ADPR.Console
                     System.Console.WriteLine(GetVersionString());
                     return 0;
                 }
-                if (string.IsNullOrWhiteSpace(opts.Script))
+                if (string.IsNullOrEmpty(opts.Script) || opts.Script.Trim() == "")
                 {
                     throw new GetOptException("Most specify a script!");
                 }
@@ -102,7 +102,7 @@ namespace JustAProgrammer.ADPR.Console
                     //TODO: GetOptException needs a constuctor that takes an inner exception.
                     throw new GetOptException(string.Format("Script {0} not found.", opts.Script));
                 }
-                if (!string.IsNullOrWhiteSpace(opts.Log4NetConfigFile))
+                if (!string.IsNullOrEmpty(opts.Log4NetConfigFile) && opts.Log4NetConfigFile.Trim() != "")
                 {
                     if (!File.Exists(opts.Log4NetConfigFile))
                     {

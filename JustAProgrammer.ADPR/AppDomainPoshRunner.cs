@@ -58,8 +58,13 @@ namespace JustAProgrammer.ADPR
                                     ShadowCopyFiles = configuration.ShadowCopyFiles.ToString()
                                 };
             var appDomain = AppDomain.CreateDomain(string.Format("AppDomainPoshRunner-{0}", configuration.AppDomainName), null, setupInfo);
-            try {
+            try
+            {
+#if NET_35
+                var runner = appDomain.CreateInstanceFromAndUnwrap(assembly.Location, typeof(AppDomainPoshRunner).FullName, false, 0, null, new object[] {configuration}, null, null, null);
+#else
                 var runner = appDomain.CreateInstanceFromAndUnwrap(assembly.Location, typeof(AppDomainPoshRunner).FullName, false, 0, null, new object[] {configuration}, null, null);
+#endif
                 return ((AppDomainPoshRunner)runner).RunScript(new Uri(Path.GetFullPath(configuration.Script)));
             }
             finally
