@@ -94,11 +94,11 @@
   <PropertyGroup>
     <PostBuildEvent>set ILMERGE_EXE=$(SolutionDir)\packages\ILRepack.1.20\tools\ILRepack.exe
 set ILMERGE_TARGETDIR=$(SolutionDir)\PoshRunner\$(OutDir)
-set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25\poshrunner.exe
+set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25poshrunner.exe
 set ILMERGE_
 echo Creating %25ILMERGE_TARGETPATH%25" 
 mkdir "%25ILMERGE_TARGETDIR%25" 2&gt; NUL
-"%25ILMERGE_EXE%25" /verbose "/out:%25ILMERGE_TARGETPATH%25" "$(TargetPath)" "$(TargetDir)\JustAProgrammer.ADPR.dll" "$(TargetDir)\log4net.dll" "$(TargetDir)\GetOptNet.dll"
+"%25ILMERGE_EXE%25" /verbose /attr:"$(TargetPath)" "/out:%25ILMERGE_TARGETPATH%25" "$(TargetPath)" "$(TargetDir)JustAProgrammer.ADPR.dll" "$(TargetDir)log4net.dll" "$(TargetDir)GetOptNet.dll"
 copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1" "%25ILMERGE_TARGETDIR%25"
 copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1.config" "%25ILMERGE_TARGETDIR%25"
 REM copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuildEvent>
