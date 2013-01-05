@@ -1,0 +1,4 @@
+%windir%\microsoft.net\framework\v4.0.30319\msbuild JustAProgrammer.ADPR.Console\JustAProgrammer.ADPR.Console.csproj /t:Clean /p:Configuration=Debug35 "/p:Platform=Any CPU"
+%windir%\microsoft.net\framework\v4.0.30319\msbuild JustAProgrammer.ADPR.Console\JustAProgrammer.ADPR.Console.csproj /t:Clean /p:Configuration=Debug "/p:Platform=Any CPU"
+%windir%\microsoft.net\framework\v4.0.30319\msbuild JustAProgrammer.ADPR.Console\JustAProgrammer.ADPR.Console.csproj /t:Clean /p:Configuration=Release35 "/p:Platform=Any CPU"
+%windir%\microsoft.net\framework\v4.0.30319\msbuild JustAProgrammer.ADPR.Console\JustAProgrammer.ADPR.Console.csproj /t:Clean /p:Configuration=Release "/p:Platform=Any CPU"

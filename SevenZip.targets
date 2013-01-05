@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SevenZipExePath>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\7-Zip', 'Path', null, RegistryView.Registry64))7z.exe</SevenZipExePath>
+    <!-- See http://msdn.microsoft.com/en-us/magazine/dd419659.aspx#id0090093 -->
+    <CleanDependsOn>CleanSevenZip;CleanZip;$(CleanDependsOn);</CleanDependsOn>
+    <SevenZipBinDependsOn>Build;</SevenZipBinDependsOn>
+    <ZipBinDependsOn>Build;</ZipBinDependsOn>
+  </PropertyGroup>
+  <Target Name="CleanSevenZip">
+    <Delete Files="$(TargetSevenZip)"/>
+  </Target>
+  <Target Name="CleanZip">
+    <Delete Files="$(TargetZip)"/>
+  </Target>
+  <Target Name="ZipBin" DependsOnTargets="$(ZipBinDependsOn)">
+    <PropertyGroup Condition="$(TargetZip) == ''">
+      <TargetZip>$(TargetDir)\$(TargetName).7z</TargetZip>
+    </PropertyGroup>
+    <PropertyGroup Condition="$(SourceZip) == ''">
+      <SourceZip>$(TargetDir)*</SourceZip>
+    </PropertyGroup>
+    <Message Importance="Low" Text="7Zip executable: $(SevenZipExePath)"/>
+    <Error Condition="'$(SevenZipExePath)' == '' Or !Exists($(SevenZipExePath))" Text="7zip does not appear to be installed." />
+    <Exec Command="&quot;$(SevenZipExePath)&quot; a -t7z -mx9 -x!$(TargetName).vshost.exe -x!*.7z -x!*.zip &quot;$(TargetZip)&quot; &quot;$(SourceZip)&quot;"/>
+  </Target>
+  <Target Name="SevenZipBin" DependsOnTargets="$(SevenZipBinDependsOn)">
+    <PropertyGroup Condition="$(TargetSevenZip) == ''">
+      <TargetSevenZip>$(TargetDir)\$(TargetName).7z</TargetSevenZip>
+    </PropertyGroup>
+    <PropertyGroup Condition="$(SourceSevenZip) == ''">
+      <SourceSevenZip>$(TargetDir)*</SourceSevenZip>
+    </PropertyGroup>
+    <Message Importance="Low" Text="7Zip executable: $(SevenZipExePath)"/>
+    <Error Condition="'$(SevenZipExePath)' == '' Or !Exists($(SevenZipExePath))" Text="7zip does not appear to be installed." />
+    <Exec Command="&quot;$(SevenZipExePath)&quot; a -t7z -mx9 -x!$(TargetName).vshost.exe -x!*.7z -x!*.zip &quot;$(TargetSevenZip)&quot; &quot;$(SourceSevenZip)&quot;"/>
+  </Target>
+</Project>

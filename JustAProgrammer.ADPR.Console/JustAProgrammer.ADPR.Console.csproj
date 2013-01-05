@@ -6,8 +6,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JustAProgrammer.ADPR.Console</RootNamespace>
     <AssemblyName>poshrunner</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup>
     <ApplicationIcon>..\art\PoshRunner.Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="..\ADPR.Properties.msbuild" />
@@ -48,11 +46,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
+    <IlmergeDir>$(ProjectDir)..\PoshRunner\$(OutDir)</IlmergeDir>
     <PreBuildEvent>powershell -file "$(ProjectDir)..\art\buildArt.ps1"</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
     <PostBuildEvent>set ILMERGE_EXE=$(ProjectDir)\..\packages\ILRepack.1.20\tools\ILRepack.exe
-set ILMERGE_TARGETDIR=$(ProjectDir)\..\PoshRunner\$(OutDir)
+set ILMERGE_TARGETDIR=$(IlmergeDir)
 set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25poshrunner.exe
 set ILMERGE_
 echo Creating %25ILMERGE_TARGETPATH%25" 
@@ -63,16 +60,19 @@ copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1.config" "%25ILMERGE_T
 REM copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
+    <ArchiveDir>$(ProjectDir)..\PoshRunner\</ArchiveDir>
+    <TargetSevenZip>$(ArchiveDir)$(TargetName)-$(Configuration).7z</TargetSevenZip>
+    <TargetZip>$(ArchiveDir)$(TargetName)-$(Configuration).zip</TargetZip>
+    <SourceSevenZip>$(IlmergeDir)*</SourceSevenZip>
+    <SourceZip>$(IlmergeDir)*</SourceZip>
     <!-- See http://msdn.microsoft.com/en-us/magazine/dd419659.aspx#id0090093 -->
-    <CleanDependsOn>
-      CleanArt;
-      $(CleanDependsOn);
-    </CleanDependsOn>
+    <CleanDependsOn>CleanArt;$(CleanDependsOn);</CleanDependsOn>
   </PropertyGroup>
   <Target Name="CleanArt">
     <Message Importance="Normal" Text="Cleaning the art"/>
     <Exec Command="powershell -file &quot;$(ProjectDir)..\art\cleanArt.ps1&quot;"/>
   </Target>
+  <Import Project="..\SevenZip.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
