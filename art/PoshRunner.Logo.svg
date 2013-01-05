@@ -73,7 +73,7 @@
      inkscape:window-height="897"
      inkscape:window-x="32"
      inkscape:window-y="32"
-     inkscape:window-maximized="0">
+     inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
        id="gridMain"
@@ -108,7 +108,7 @@
        sodipodi:cy="32"
        sodipodi:rx="260"
        sodipodi:ry="240"
-       d="m 800,32 a 260,240 0 1 1 -520,0 260,240 0 1 1 520,0 z"
+       d="M 800,32 C 800,164.54834 683.59403,272 540,272 396.40597,272 280,164.54834 280,32 c 0,-132.54834 116.40597,-240 260,-240 143.59403,0 260,107.45166 260,240 z"
        transform="matrix(1.959924,-0.18978136,0.20559648,2.123251,-552.93802,574.90008)" />
     <text
        xml:space="preserve"
@@ -125,13 +125,13 @@
        xml:space="preserve"
        style="font-size:600px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Droid Sans Mono;-inkscape-font-specification:Droid Sans Mono"
        x="-40"
-       y="1052.3622"
+       y="1012.3622"
        id="textP"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspanP"
          x="-40"
-         y="1052.3622">P</tspan></text>
+         y="1012.3622">P</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot2991"
