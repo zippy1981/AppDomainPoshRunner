@@ -7,7 +7,10 @@
     <RootNamespace>JustAProgrammer.ADPR.Console</RootNamespace>
     <AssemblyName>poshrunner</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\ADPR.Properties.msbuild"/>
+  <PropertyGroup>
+    <ApplicationIcon>..\art\PoshRunner.Logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="..\ADPR.Properties.msbuild" />
   <ItemGroup>
     <Reference Include="GetOptNet, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c9bf2c3a9070fff0, processorArchitecture=MSIL">
       <HintPath>..\packages\GetOptNet.1.0.1.0\lib\net30\GetOptNet.dll</HintPath>
@@ -38,7 +41,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\art\PoshRunner.Logo.ico">
+      <Link>PoshRunner.Logo.ico</Link>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>powershell -file "$(ProjectDir)..\art\buildArt.ps1"</PreBuildEvent>
+  </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>set ILMERGE_EXE=$(ProjectDir)\..\packages\ILRepack.1.20\tools\ILRepack.exe
 set ILMERGE_TARGETDIR=$(ProjectDir)\..\PoshRunner\$(OutDir)
@@ -51,6 +62,17 @@ copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1" "%25ILMERGE_TARGETDI
 copy "$(TargetDir)\AppDomainPoshRunner.SecondAppDomain.ps1.config" "%25ILMERGE_TARGETDIR%25"
 REM copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <!-- See http://msdn.microsoft.com/en-us/magazine/dd419659.aspx#id0090093 -->
+    <CleanDependsOn>
+      CleanArt;
+      $(CleanDependsOn);
+    </CleanDependsOn>
+  </PropertyGroup>
+  <Target Name="CleanArt">
+    <Message Importance="Normal" Text="Cleaning the art"/>
+    <Exec Command="powershell -file &quot;$(ProjectDir)..\art\cleanArt.ps1&quot;"/>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

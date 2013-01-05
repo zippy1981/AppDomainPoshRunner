@@ -6,6 +6,9 @@ obj
 *.csproj.VisualState.xml
 TestResult.xml
 *.swp
+*~
 UpgradeLog.XML
 _ReSharper.*/
 _UpgradeReport_Files/
+art/PoshRunner.Logo*.png
+Thumbs.db
