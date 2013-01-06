@@ -2,11 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SevenZipCmdLine.MSBuild</id>
-    <version>1.0.0.0</version>
+    <version>1.0.0.1</version>
     <authors>zippy1981</authors>
     <owners>zippy1981</owners>
     <licenseUrl>https://github.com/zippy1981/SevenZipCmdLine.MSBuild/blob/master/NuGet/license.txt</licenseUrl>
     <projectUrl>https://github.com/zippy1981/SevenZipCmdLine.MSBuild</projectUrl>
+    <iconUrl>http://www.7-zip.org/7ziplogo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>MSBuild tasks that use 7z.exe</description>
     <releaseNotes>Initial Release.</releaseNotes>

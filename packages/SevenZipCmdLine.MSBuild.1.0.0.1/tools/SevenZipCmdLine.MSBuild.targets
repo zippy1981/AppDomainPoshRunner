@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2013 Justin Dearing <zippy1981@gmail.com>. The latest copy of this file may be obtained at https://github.com/zippy1981/SevenZipCmdLine.MSBuild -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SevenZipExePath>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\7-Zip', 'Path', null, RegistryView.Registry64))7z.exe</SevenZipExePath>

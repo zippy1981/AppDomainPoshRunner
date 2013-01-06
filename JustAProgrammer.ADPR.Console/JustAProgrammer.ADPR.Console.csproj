@@ -81,7 +81,7 @@ REM copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuild
   </Target>
   -->
   <PropertyGroup>
-    <SevenZipCmdLineMSBuildTargetsFile>..\packages\SevenZipCmdLine.MSBuild.1.0.0.0\tools\SevenZipCmdLine.MSBuild.targets</SevenZipCmdLineMSBuildTargetsFile>
+    <SevenZipCmdLineMSBuildTargetsFile>..\packages\SevenZipCmdLine.MSBuild.1.0.0.1\tools\SevenZipCmdLine.MSBuild.targets</SevenZipCmdLineMSBuildTargetsFile>
   </PropertyGroup>
   <Import Project="$(SevenZipCmdLineMSBuildTargetsFile)" />
 </Project>
