@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>PoshRunner</id>
+    <version>0.9.20130105.1</version>
+    <authors>zippy1981</authors>
+    <owners>zippy1981</owners>
+    <licenseUrl>https://github.com/zippy1981/AppDomainPoshRunner/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://sourceforge.net/projects/poshrunner/</projectUrl>
+    <iconUrl>http://www.justaprogrammer.net/wp-content/uploads/2013/01/PoshRunner.Logo-128x128.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>poshrunner.exe is an alternative to "PowerShell.exe -file". It's main improvements are as follows. First, foo.ps1 uses foo.ps1.config as its config file as opposed to powershell.exe.config. Secondly, you have the option of logging the output of Write-* to the console, poshrunner.log, or a custom log4net configuration.</description>
+    <releaseNotes>Fixed the icon.</releaseNotes>
+    <copyright>Copyright 2011-2013</copyright>
+    <tags>powershell poshrunner AppDomain log4net</tags>
+  </metadata>
+</package>
