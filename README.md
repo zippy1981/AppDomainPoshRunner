@@ -1,7 +1,7 @@
 What is ADPR?
 -------------
 
-AppDomainPoshRunner, or ADPS for short, is a library and executable for running PowerShell scripts in a separate appdomain.
+AppDomainPoshRunner, or ADPS for short, is a library and executable for running PowerShell scripts in a separate appdomain. Its most common form is the standalone executable poshrunner.exe.
 
 ### Usage examples ###
 
@@ -17,11 +17,15 @@ Included in the zip file is AppDomainPoshRunner.SecondAppDomain.ps1, so you can 
 Here are some compelling features:
 
 * A script can have its own app.config separate from powershell.exe.config
-* All outuput is written to a custom implementation of [log4Net.ILog](http://logging.apache.org/log4net/release/sdk/log4net.ILog.html). This means:
+* All output is written to a custom implementation of [log4Net.ILog](http://logging.apache.org/log4net/release/sdk/log4net.ILog.html). This means:
     * You can send script output to a log file instead of (or in addition to) the console.
     * You can have `Write-Error` write a message to the event log.
     * You can send script output to mongodb with [Log4Mongo](http://log4mongo.org/display/PUB/Log4mongo+for+.NET)
     * Much much more
+
+### How do I download ADPR ###
+
+Since GitHub [no longer allows downloads](https://github.com/blog/1302-goodbye-uploads), I have created [a sourceforge.net project for PoshRunner](https://sourceforge.net/projects/poshrunner/). Here is a [direct link](https://sourceforge.net/projects/poshrunner/files/latest/download) to the latest download.
 
 ### What is the status of ADPR ###
 
