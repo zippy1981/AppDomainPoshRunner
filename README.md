@@ -25,6 +25,8 @@ Here are some compelling features:
 
 ### How do I download ADPR ###
 
+The recommended way to install poshrunner.exe is [the chocolatey package](http://chocolatey.org/packages/PoshRunner/).
+
 Since GitHub [no longer allows downloads](https://github.com/blog/1302-goodbye-uploads), I have created [a sourceforge.net project for PoshRunner](https://sourceforge.net/projects/poshrunner/). Here is a [direct link](https://sourceforge.net/projects/poshrunner/files/latest/download) to the latest download.
 
 ### What is the status of ADPR ###
