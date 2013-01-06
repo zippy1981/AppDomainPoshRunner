@@ -22,7 +22,7 @@
     </PropertyGroup>
     <Message Importance="Low" Text="7Zip executable: $(SevenZipExePath)"/>
     <Error Condition="'$(SevenZipExePath)' == '' Or !Exists($(SevenZipExePath))" Text="7zip does not appear to be installed." />
-    <Exec Command="&quot;$(SevenZipExePath)&quot; a -t7z -mx9 -x!$(TargetName).vshost.exe -x!*.7z -x!*.zip &quot;$(TargetZip)&quot; &quot;$(SourceZip)&quot;"/>
+    <Exec Command="&quot;$(SevenZipExePath)&quot; a -tzip -mx9 -x!$(TargetName).vshost.exe -x!*.7z -x!*.zip &quot;$(TargetZip)&quot; &quot;$(SourceZip)&quot;"/>
   </Target>
   <Target Name="SevenZipBin" DependsOnTargets="$(SevenZipBinDependsOn)">
     <PropertyGroup Condition="$(TargetSevenZip) == ''">
