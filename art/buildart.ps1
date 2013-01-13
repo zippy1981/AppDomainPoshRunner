@@ -75,11 +75,12 @@ $inkscapeExe = Get-InkscapeExePath
 $png2IcoArgs.Add("`"$(Join-Path $artFolder 'PoshRunner.Logo.ico')`"");
 
 # TODO: Support 256 color icons.
-@(16,32,48,64,128) | %{
+16,32,48,64,128,256 | %{
     $pngName = "PoshRunner.Logo-$($_)x$($_).png"
     $pngName = "$(Join-Path $artFolder $pngName)"
 	& "$inkscapeExe" --export-png=$($pngName) -w $_ -h $_ (Join-Path $artFolder 'PoshRunner.Logo.svg')  | Write-Verbose -Verbose
     $png2IcoArgs.Add("`"$($pngName)`"");
 }
 
-Start-Process -Wait -NoNewWindow -Verbose -FilePath 'png2ico' -ArgumentList $png2IcoArgs
+# This needs to run in a 32 bit instance of powershell
+& "$($env:systemroot)\syswow64\WindowsPowerShell\v1.0\powershell.exe" -file buildIcon.ps1 -noprofile

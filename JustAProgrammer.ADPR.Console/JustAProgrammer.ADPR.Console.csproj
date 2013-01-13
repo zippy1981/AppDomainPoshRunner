@@ -48,7 +48,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <IlmergeDir>$(ProjectDir)..\PoshRunner\$(OutDir)</IlmergeDir>
-    <PreBuildEvent>powershell -file "$(ProjectDir)..\art\buildArt.ps1"</PreBuildEvent>
+    <PreBuildEvent>powershell -file "$(ProjectDir)..\art\buildArt.ps1" -noprofile</PreBuildEvent>
     <PostBuildEvent>set ILMERGE_EXE=$(ProjectDir)\..\packages\ILRepack.1.20\tools\ILRepack.exe
 set ILMERGE_TARGETDIR=$(IlmergeDir)
 set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25poshrunner.exe
@@ -71,7 +71,7 @@ REM copy "$(TargetDir)\ADPR.log4net.config" "%25ILMERGE_TARGETDIR%25"</PostBuild
   </PropertyGroup>
   <Target Name="CleanArt">
     <Message Importance="Normal" Text="Cleaning the art" />
-    <Exec Command="powershell -file &quot;$(ProjectDir)..\art\cleanArt.ps1&quot;" />
+    <Exec Command="powershell -file &quot;$(ProjectDir)..\art\cleanArt.ps1&quot; -noprofile" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
