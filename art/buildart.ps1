@@ -83,4 +83,4 @@ $png2IcoArgs.Add("`"$(Join-Path $artFolder 'PoshRunner.Logo.ico')`"");
 }
 
 # This needs to run in a 32 bit instance of powershell
-& "$($env:systemroot)\syswow64\WindowsPowerShell\v1.0\powershell.exe" -file buildIcon.ps1 -noprofile
+& "$($env:systemroot)\syswow64\WindowsPowerShell\v1.0\powershell.exe" -file "$(Join-Path $artFolder buildIcon.ps1)" -noprofile
