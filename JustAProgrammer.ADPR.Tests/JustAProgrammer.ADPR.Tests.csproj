@@ -51,7 +51,7 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\JustAProgrammer.ADPR\JustAProgrammer.ADPR.pfx</AssemblyOriginatorKeyFile>
@@ -79,9 +79,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\JustAProgrammer.ADPR\JustAProgrammer.ADPR.pfx">
-      <Link>JustAProgrammer.ADPR.pfx</Link>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
