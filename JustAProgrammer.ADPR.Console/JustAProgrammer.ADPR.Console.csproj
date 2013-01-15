@@ -8,6 +8,12 @@
     <AssemblyName>poshrunner</AssemblyName>
     <ApplicationIcon>..\art\PoshRunner.Logo.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\JustAProgrammer.ADPR\PoshRunner.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <Import Project="..\ADPR.Properties.msbuild" />
   <ItemGroup>
     <Reference Include="GetOptNet, Version=1.0.1.0, Culture=neutral, PublicKeyToken=c9bf2c3a9070fff0, processorArchitecture=MSIL">
@@ -37,6 +43,9 @@
     <None Include="..\JustAProgrammer.ADPR\AppDomainPoshRunner.SecondAppDomain.ps1.config">
       <Link>AppDomainPoshRunner.SecondAppDomain.ps1.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\JustAProgrammer.ADPR\PoshRunner.snk">
+      <Link>PoshRunner.snk</Link>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

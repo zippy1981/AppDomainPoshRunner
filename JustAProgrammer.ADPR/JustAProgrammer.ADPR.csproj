@@ -7,9 +7,9 @@
     <RootNamespace>JustAProgrammer.ADPR</RootNamespace>
     <AssemblyName>JustAProgrammer.ADPR</AssemblyName>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>JustAProgrammer.ADPR.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>PoshRunner.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <Import Project="..\ADPR.Properties.msbuild"/>
+  <Import Project="..\ADPR.Properties.msbuild" />
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=23c9591f2b16657b, processorArchitecture=MSIL" Condition="'$(TargetFrameworkVersion)' == 'v4.0' ">
       <SpecificVersion>False</SpecificVersion>
@@ -21,7 +21,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management.Automation"/>
+    <Reference Include="System.Management.Automation" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +52,7 @@
     </None>
     <None Include="JustAProgrammer.ADPR.pfx" />
     <EmbeddedResource Include="RollingFileAppender.log4net.config" />
+    <None Include="PoshRunner.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
