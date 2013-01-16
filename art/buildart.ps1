@@ -70,17 +70,22 @@ function Get-InkscapeExePath() {
 
 # help Get-Inkscape*
 $artFolder =  (split-path -parent $MyInvocation.MyCommand.Definition)
+$logoSvgPath = Join-Path $artFolder 'PoshRunner.Logo.svg'
+$logoIcoPath = Join-Path $artFolder 'PoshRunner.Logo.ico'
 $inkscapeExe = Get-InkscapeExePath
-[System.Collections.Generic.List[string]] $png2IcoArgs = New-Object 'System.Collections.Generic.List[string]'
-$png2IcoArgs.Add("`"$(Join-Path $artFolder 'PoshRunner.Logo.ico')`"");
 
-# TODO: Support 256 color icons.
-16,32,48,64,128,256 | %{
-    $pngName = "PoshRunner.Logo-$($_)x$($_).png"
-    $pngName = "$(Join-Path $artFolder $pngName)"
-	& "$inkscapeExe" --export-png=$($pngName) -w $_ -h $_ (Join-Path $artFolder 'PoshRunner.Logo.svg')  | Write-Verbose -Verbose
-    $png2IcoArgs.Add("`"$($pngName)`"");
+Write-Debug "Svg $($logoSvgPath) Modified Time: $([IO.File]::GetLastWriteTime($logoSvgPath))"
+Write-Debug "Logo $($logoIcoPath) Create time $([IO.File]::GetCreationTime($logoIcoPath))"
+if ([IO.File]::GetLastWriteTime($logoSvgPath) -gt [IO.File]::GetCreationTime($logoIcoPath)) {
+    16,32,48,64,128,256 | %{
+        $pngName = "PoshRunner.Logo-$($_)x$($_).png"
+        $pngName = "$(Join-Path $artFolder $pngName)"
+	    & "$inkscapeExe" --export-png="$($pngName)" -w $_ -h $_ "$logoSvgPath" | Write-Verbose -Verbose
+    }
+
+    # This needs to run in a 32 bit instance of powershell
+    & "$($env:systemroot)\syswow64\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -File "$(Join-Path $artFolder buildIcon.ps1)"
 }
-
-# This needs to run in a 32 bit instance of powershell
-& "$($env:systemroot)\syswow64\WindowsPowerShell\v1.0\powershell.exe" -file "$(Join-Path $artFolder buildIcon.ps1)" -noprofile
+else {
+    Write-Verbose "Icon newer than svg skipping art generation" -Verbose 
+}

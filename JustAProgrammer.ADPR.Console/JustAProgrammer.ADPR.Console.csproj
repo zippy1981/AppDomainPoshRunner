@@ -57,7 +57,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <IlmergeDir>$(ProjectDir)..\PoshRunner\$(OutDir)</IlmergeDir>
-    <PreBuildEvent>powershell -file "$(ProjectDir)..\art\buildArt.ps1" -noprofile</PreBuildEvent>
+    <PreBuildEvent>powershell -noprofile -file "$(ProjectDir)..\art\buildArt.ps1"</PreBuildEvent>
     <PostBuildEvent>set ILMERGE_EXE=$(ProjectDir)\..\packages\ILRepack.1.20\tools\ILRepack.exe
 set ILMERGE_TARGETDIR=$(IlmergeDir)
 set ILMERGE_TARGETPATH=%25ILMERGE_TARGETDIR%25poshrunner.exe
