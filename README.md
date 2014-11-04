@@ -1,5 +1,6 @@
 What is ADPR?
 -------------
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/zippy1981/AppDomainPoshRunner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 AppDomainPoshRunner, or ADPS for short, is a library and executable for running PowerShell scripts in a separate appdomain. Its most common form is the standalone executable poshrunner.exe.
 
